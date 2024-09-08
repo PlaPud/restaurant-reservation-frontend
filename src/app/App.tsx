@@ -2,18 +2,33 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
-import "./App.css";
-import LandingPage from "./routes/LandingPage";
-import { AppBar, Container, Toolbar, Typography } from "@mui/material";
+import "./App.scss";
+import LandingPage from "./routes/landing";
+import { AppBar, Container, createTheme, ThemeProvider, Toolbar, Typography } from "@mui/material";
 import { AdbRounded } from "@mui/icons-material";
+import { green } from "@mui/material/colors";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Login from "./routes/auth/login/login";
+
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: green[500]
+    },
+    secondary: {
+      main: green[300]
+    }
+  }
+})
 
 function App() {
   return (
-    <>
-      <AppBar position="static">
+    <ThemeProvider theme={theme}>
+      <AppBar position="static" color="primary">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
-            <AdbRounded sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+            <AdbRounded sx={{ display: { xs: "none", md: "flex" }, mr: 1, color: "white" }} />
             <Typography
               variant="h6"
               noWrap
@@ -25,7 +40,7 @@ function App() {
                 fontFamily: "monospace",
                 fontWeight: 700,
                 letterSpacing: ".3rem",
-                color: "inherit",
+                color: "white",
                 textDecoration: "none",
               }}
             >
@@ -34,8 +49,13 @@ function App() {
           </Toolbar>
         </Container>
       </AppBar>
-      <LandingPage />
-    </>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<LandingPage/>}/>
+          <Route path="/login" element={<Login/>}/>
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 
