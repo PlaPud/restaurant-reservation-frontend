@@ -1,14 +1,14 @@
 import { useState } from "react"
 
-const useToggle = () => {
+const useToggle = (isToggle? : boolean) => {
   
-  const [toggle, setToggle] = useState(false) 
+  const [toggle, setToggle] = useState(isToggle) 
   
-  const handleClickToggle = () => {
+  const handleToggle = () => {
     setToggle((toggle) => !toggle) 
   }
 
-  return {toggle, handleClickToggle}
+  return {toggle, handleToggle}
   
 }
 

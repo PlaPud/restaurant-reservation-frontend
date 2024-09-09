@@ -5,7 +5,7 @@ export interface UserLoginData {
 }
 
 export interface Customer {
-  customerid: string;
+  customerId: string;
   fName: string;
   lName: string;
   email: string;

@@ -5,11 +5,11 @@ import { Role } from '../../../shared/enum/role'
 import useLoginForm from '../hooks/use-login-form'
 import useRoleTab from '../hooks/use-role-tab'
 
-const LoginForm = ({ onLogin }) => {
+const LoginForm = ({ isSubmitting ,onLogin }) => {
 
-  const { toggle, handleClickToggle } = useToggle();
+  const { toggle, handleToggle } = useToggle();
   const { role, handleChangeRoleTab } = useRoleTab();
-  const { email, password, handleEmailChange, handlePassChange, handleSubmit } = useLoginForm()
+  const { formData, handleInputChange, handleSubmit } = useLoginForm()
 
 
   return (
@@ -35,28 +35,28 @@ const LoginForm = ({ onLogin }) => {
           <h4>as {role}</h4>
         </Box>
         <form method='get' action={'/'} onSubmit={async (e) => {
-          // handleSubmit(e)
           e.preventDefault()
-          await onLogin({ email, password }, role)
+          await onLogin(formData, role)
         }} >
           <Box mt={2}>
             <FormControl fullWidth={true}>
               <InputLabel htmlFor="email-field">Email</InputLabel>
-              <OutlinedInput id="email-field" onChange={handleEmailChange}  fullWidth={true} label="Email"/>
+              <OutlinedInput name='email' id="email-field" onChange={handleInputChange}  fullWidth={true} label="Email"/>
             </FormControl>
           </Box>
           <Box mt={2}>
             <FormControl fullWidth={true}>
               <InputLabel htmlFor="pass-field">Password</InputLabel>
               <OutlinedInput
-                onChange={handlePassChange}
+                onChange={handleInputChange}
+                name="password"
                 id="pass-field"
                 type={toggle ? "text": "password"}
                 endAdornment={
                   <InputAdornment position='end'>
                     <IconButton
                       aria-label="toggle password visibility"
-                      onClick={handleClickToggle}
+                      onClick={handleToggle}
                       edge="end"
                     >{toggle ? <VisibilityOff/> : <Visibility/>}</IconButton>
                   </InputAdornment>
@@ -65,7 +65,7 @@ const LoginForm = ({ onLogin }) => {
             </FormControl>
           </Box>
           <Box mt={3}>
-            <Button type="submit" color="primary" variant="outlined">
+            <Button disabled={isSubmitting} type="submit" color="primary" variant="outlined">
               Login
             </Button>
           </Box>

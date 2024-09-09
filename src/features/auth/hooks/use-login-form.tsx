@@ -1,23 +1,32 @@
-import { SyntheticEvent } from 'react';
-import useTextFieldChange from '../../../hooks/use-textfield-change';
+import { ChangeEvent, SyntheticEvent, useState } from 'react';
 import { UserLoginData } from '../../../shared/interface/user';
 
 const useLoginForm = () => {
-  const {fieldData: email, handleFieldChange: handleEmailChange} = useTextFieldChange();
-  const {fieldData: password, handleFieldChange: handlePassChange} = useTextFieldChange();
+  const [formData, setFormData] = useState<UserLoginData>({
+    email: "",
+    password: ""
+  })
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-    const formData : UserLoginData = { email, password };
-    console.log(formData);
+    const body : UserLoginData = formData;
+    console.log(body);
   };
 
+
+  const handleInputChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const { name, value } = e.currentTarget
+
+    setFormData({
+      ...formData,
+      [name]: value,
+    })
+  }
+
   return {
-    email, 
-    password,
-    handleEmailChange,
-    handlePassChange,
-    handleSubmit,
+    formData,
+    handleInputChange,
+    handleSubmit
   };
 };
 

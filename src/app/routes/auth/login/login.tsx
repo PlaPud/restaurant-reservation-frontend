@@ -1,14 +1,12 @@
-import { Box, Button, Container, Grid2 as Grid } from '@mui/material'
+import { Box, Container, Grid2 as Grid } from '@mui/material'
 import LoginForm from '../../../../features/auth/components/login-form'
 import useAuthService from '../../../../features/auth/hooks/service/use-auth-service'
 import useLogin from '../../../../features/auth/hooks/use-login'
-import { UserLoginData } from '../../../../shared/interface/user'
-import { Role } from '../../../../shared/enum/role'
 
 const Login = () => {
 
   const service  = useAuthService();
-  const { handleLoginService } = useLogin(service);
+  const { isSubmitting, handleLoginService } = useLogin(service);
   
   return (
     <>
@@ -19,7 +17,7 @@ const Login = () => {
               <h1>Login</h1>
             </Box>
             <Box mt={2} className="login-form">
-              <LoginForm onLogin={handleLoginService}
+              <LoginForm isSubmitting={isSubmitting} onLogin={handleLoginService}
               />
             </Box>
             <Box className="register-link">

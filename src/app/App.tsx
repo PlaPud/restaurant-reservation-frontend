@@ -9,6 +9,7 @@ import { AdbRounded } from "@mui/icons-material";
 import { green } from "@mui/material/colors";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./routes/auth/login/login";
+import Register from "./routes/auth/register/register";
 
 
 const theme = createTheme({
@@ -53,6 +54,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage/>}/>
           <Route path="/login" element={<Login/>}/>
+          <Route path="/register" element={<Register/>}/>
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
