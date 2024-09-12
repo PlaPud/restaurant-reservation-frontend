@@ -1,0 +1,56 @@
+import {
+  Avatar,
+  Box,
+  IconButton,
+  Menu,
+  MenuItem,
+  Tooltip,
+  Typography,
+} from "@mui/material";
+import { NavData } from "../user-appbar";
+
+const UserMenuBar = ({ settings, userMenuEl, onOpenUser, onCloseUser }) => {
+  return (
+    <Box sx={{ flexGrow: 0 }}>
+      <Tooltip title="Open settings">
+        <IconButton onClick={onOpenUser} sx={{ p: 0 }}>
+          <Avatar alt="User Account" src="src\assets\default-profile.jpg" />
+        </IconButton>
+      </Tooltip>
+      <Menu
+        sx={{ mt: "45px" }}
+        id="menu-appbar"
+        anchorEl={userMenuEl}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+        keepMounted
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+        open={Boolean(userMenuEl)}
+        onClose={onCloseUser}
+      >
+        {Object.values(settings).map((setting: NavData) => (
+          <MenuItem
+            href={setting.route}
+            key={setting.title}
+            onClick={onCloseUser}
+          >
+            <Typography
+              component={"a"}
+              href={setting.route}
+              sx={{ textAlign: "center" }}
+            >
+              {setting.title}
+            </Typography>
+          </MenuItem>
+        ))}
+      </Menu>
+    </Box>
+  );
+};
+
+export default UserMenuBar;

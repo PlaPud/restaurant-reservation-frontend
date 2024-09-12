@@ -1,6 +1,6 @@
 import { Button, Container } from "@mui/material";
 import React from "react";
-import './landing.scss'
+import "./landing.scss";
 
 const LandingPage = () => {
   return (
@@ -9,7 +9,15 @@ const LandingPage = () => {
         <h1 className="title">Restaurant Reserve</h1>
         <h2 className="title-desc">Book you restaurant now!</h2>
         <div>
-          <Button variant="outlined" color="secondary" size="large" disableRipple={true}>Enter Site</Button>
+          <Button
+            href="/home"
+            variant="outlined"
+            color="secondary"
+            size="large"
+            disableRipple={true}
+          >
+            Enter Site
+          </Button>
         </div>
       </Container>
     </>

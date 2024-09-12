@@ -1,7 +1,7 @@
-import { ChangeEvent, SyntheticEvent, useState } from 'react';
-import { UserLoginData } from '../../../shared/interface/user';
+import { ChangeEvent, SyntheticEvent, useState } from "react";
+import { UserLoginData } from "../../../shared/interface/user";
 
-export interface CustomerRegisData extends UserLoginData{
+export interface CustomerRegisData extends UserLoginData {
   fName: string;
   lName: string;
   phone: string;
@@ -13,32 +13,35 @@ export interface RestaurantRegisData extends UserLoginData {
   phone: string;
 }
 
-export type UserRegisterData = CustomerRegisData | RestaurantRegisData
+export type UserRegisterData = CustomerRegisData | RestaurantRegisData;
 
-const useRegisForm = <T extends CustomerRegisData | RestaurantRegisData>(defaultForm: T) => {
-  const [formData, setFormData] = useState<T>(defaultForm)
+const useRegisForm = <T extends CustomerRegisData | RestaurantRegisData>(
+  defaultForm?: T
+) => {
+  const [formData, setFormData] = useState<null | T>(defaultForm);
 
+  const clearFormFields = () => {
+    setFormData(null);
+  };
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-    // const formData : User = { email, password };
-    // console.log(formData);
   };
 
   const handleInputChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value
-    })
-  }
+      [name]: value,
+    });
+  };
 
   return {
     formData,
     handleInputChange,
     handleSubmit,
+    clearFormFields,
   };
+};
 
-}
-
-export default useRegisForm
+export default useRegisForm;

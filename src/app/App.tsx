@@ -2,59 +2,37 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
-import "./App.scss";
-import LandingPage from "./routes/landing";
-import { AppBar, Container, createTheme, ThemeProvider, Toolbar, Typography } from "@mui/material";
-import { AdbRounded } from "@mui/icons-material";
-import { green } from "@mui/material/colors";
+import { createTheme, ThemeProvider } from "@mui/material";
+import { green, grey, lightGreen } from "@mui/material/colors";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import UserAppBar from "../components/appbar/user-appbar";
+import "./App.scss";
 import Login from "./routes/auth/login/login";
 import Register from "./routes/auth/register/register";
-
+import LandingPage from "./routes/landing";
+import RestaurantList from "./routes/app/restaurant-list";
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: green[500]
+      main: green[500],
     },
     secondary: {
-      main: green[300]
-    }
-  }
-})
+      main: lightGreen[500],
+    },
+  },
+});
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <AppBar position="static" color="primary">
-        <Container maxWidth="xl">
-          <Toolbar disableGutters>
-            <AdbRounded sx={{ display: { xs: "none", md: "flex" }, mr: 1, color: "white" }} />
-            <Typography
-              variant="h6"
-              noWrap
-              component="a"
-              href="/"
-              sx={{
-                mr: 2,
-                display: { xs: "none", md: "flex" },
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "white",
-                textDecoration: "none",
-              }}
-            >
-              RESTAURANT RESERVE
-            </Typography>
-          </Toolbar>
-        </Container>
-      </AppBar>
       <BrowserRouter>
+        <UserAppBar />
         <Routes>
-          <Route path="/" element={<LandingPage/>}/>
-          <Route path="/login" element={<Login/>}/>
-          <Route path="/register" element={<Register/>}/>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/home" element={<RestaurantList />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
