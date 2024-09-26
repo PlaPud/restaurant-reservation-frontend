@@ -13,7 +13,7 @@ const PasswordInputField = ({ onChange }) => {
 
   return (
     <FormControl fullWidth={true}>
-      <InputLabel htmlFor="pass-field">Password</InputLabel>
+      <InputLabel htmlFor="pass-field">รหัสผ่าน</InputLabel>
       <OutlinedInput
         required={true}
         onChange={onChange}

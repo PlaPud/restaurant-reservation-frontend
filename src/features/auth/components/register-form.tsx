@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Container,
+  FormControl,
   Grid2 as Grid,
   Paper,
   Tab,
@@ -10,21 +11,36 @@ import {
 import { GeneralInputField } from "../../../components/forms/general-form-field";
 import PasswordInputField from "../../../components/forms/password-input-field";
 import { Role } from "../../../shared/enum/role";
-import useRegisForm from "../hooks/use-regis-form";
+import useRegisForm, { RestaurantRegisData } from "../hooks/use-regis-form";
 import useRoleTab from "../hooks/use-role-tab";
+import SelectFormField from "../../../components/forms/select-form-field";
+import useSelectAddress from "../../../hooks/use-select-address";
+import { ThaiAddressAxiosService } from "../../../services/address/thai-address-axios-service";
 
 const RegisterForm = ({ isSubmitting, onRegister }) => {
+  const service = new ThaiAddressAxiosService();
+
   const { role, handleChangeRoleTab } = useRoleTab();
 
-  const { formData, handleInputChange, handleSubmit, clearFormFields } =
-    useRegisForm();
+  const {
+    formData,
+    preFetchedProvinces,
+    fetchedDistricts,
+    fetchedSubDists,
+    selectedAddress,
+    handleChangeProvince,
+    handleChangeDistrict,
+    handleChangeSubDistrict,
+    handleInputChange,
+    handleSubmit,
+    clearFormFields,
+  } = useRegisForm(service);
 
   return (
     <Paper
       sx={{
         backgroundColor: "whitesmoke",
         padding: "0.25vh",
-        height: "32rem",
       }}
       elevation={3}
     >
@@ -75,7 +91,7 @@ const RegisterForm = ({ isSubmitting, onRegister }) => {
                       type={"text"}
                       id={"fname-field"}
                       name={"fName"}
-                      label={"Firstname"}
+                      label={"ชื่อ"}
                     />
                   </Grid>
                   <Grid size={6}>
@@ -85,7 +101,7 @@ const RegisterForm = ({ isSubmitting, onRegister }) => {
                       type={"text"}
                       id={"lname-field"}
                       name={"lName"}
-                      label={"Lastname"}
+                      label={"นามสกุล"}
                     />
                   </Grid>
                 </Grid>
@@ -98,7 +114,7 @@ const RegisterForm = ({ isSubmitting, onRegister }) => {
                       type={"text"}
                       id={"name-field"}
                       name={"name"}
-                      label={"Restaurant Name"}
+                      label={"ชื่อร้าน"}
                     />
                   </Box>
                   <Box mt={1}>
@@ -108,9 +124,47 @@ const RegisterForm = ({ isSubmitting, onRegister }) => {
                       onChange={handleInputChange}
                       id={"address-field"}
                       name={"address"}
-                      label={"Address"}
+                      label={"ที่ตั้งร้านเลขที่"}
                     />
                   </Box>
+                  <Grid mt={2} mb={2} spacing={1} container>
+                    <Grid size={{ xs: 12, md: 4 }}>
+                      <SelectFormField
+                        id="province-field"
+                        label="จังหวัด"
+                        name="province"
+                        selectedValue={selectedAddress.province}
+                        items={preFetchedProvinces}
+                        onChange={(e) => {
+                          handleChangeProvince(e);
+                        }}
+                      />
+                    </Grid>
+                    <Grid size={{ xs: 12, md: 4 }}>
+                      <SelectFormField
+                        id="district-field"
+                        label="อำเภอ/แขวง"
+                        name="district"
+                        selectedValue={selectedAddress.district}
+                        items={fetchedDistricts}
+                        onChange={(e) => {
+                          handleChangeDistrict(e);
+                        }}
+                      />
+                    </Grid>
+                    <Grid size={{ xs: 12, md: 4 }}>
+                      <SelectFormField
+                        id="sub-district-field"
+                        label="ตำบล/เขต"
+                        name="subDistrict"
+                        selectedValue={selectedAddress.subDistrict}
+                        items={fetchedSubDists}
+                        onChange={(e) => {
+                          handleChangeSubDistrict(e);
+                        }}
+                      />
+                    </Grid>
+                  </Grid>
                 </>
               )}
               <Box mt={1}>
@@ -133,7 +187,7 @@ const RegisterForm = ({ isSubmitting, onRegister }) => {
                   onChange={handleInputChange}
                   id={"phone-field"}
                   name={"phone"}
-                  label={"Phone Number"}
+                  label={"เบอร์โทรศัพท์"}
                 />
               </Box>
             </Box>

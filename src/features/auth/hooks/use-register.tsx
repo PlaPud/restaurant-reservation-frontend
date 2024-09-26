@@ -17,18 +17,21 @@ const useRegister = (service: IAuthService) => {
     formData: UserRegisterData,
     role: Role
   ) => {
-    toggleSubmitting();
-
-    switch (role) {
-      case Role.Customer:
-        await service.registerCustomer(formData as CustomerRegisData);
-        break;
-      case Role.Restaurant:
-        await service.registerRestaurant(formData as RestaurantRegisData);
-        break;
+    try {
+      toggleSubmitting();
+      switch (role) {
+        case Role.Customer:
+          await service.registerCustomer(formData as CustomerRegisData);
+          break;
+        case Role.Restaurant:
+          await service.registerRestaurant(formData as RestaurantRegisData);
+          break;
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      toggleSubmitting();
     }
-
-    toggleSubmitting();
 
     navigate("/home");
   };
