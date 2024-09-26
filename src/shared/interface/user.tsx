@@ -1,27 +1,43 @@
-
-export interface UserLoginData {
+export interface UserLoginReqBody {
   email: string;
   password: string;
 }
 
-export interface Customer {
+export interface CustomerResData {
   customerId: string;
   fName: string;
   lName: string;
   email: string;
   phone: string;
-  currentReserves: Reservation[] 
+  profileImgPath: string;
+  reservations: ReservationResData[];
 }
 
-export interface Reservation {
-
+export interface ReservationResData {
+  reserveId: string;
+  customerId: string | null;
+  customer: CustomerResData | null;
+  restaurantId: string;
+  restaurant: RestaurantResData;
+  lastModified: number | null;
+  seats: number;
+  reservePrice: number;
+  reserveDate: number;
+  payImgUrl: string;
+  isPayed: boolean;
+  isAttended: boolean;
 }
 
-export interface Restaurant {
+export interface RestaurantResData {
   restaurantId: string;
   name: string;
-  address: string;
-  email: string;
   phone: string;
-  reservations: Reservation[]
+  email: string;
+  address: string;
+  subDistrict: string;
+  district: string;
+  province: string;
+  profileimgPath: string;
+  description: string;
+  currentReserves: ReservationResData[];
 }

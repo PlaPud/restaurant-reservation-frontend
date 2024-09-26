@@ -1,73 +1,122 @@
+import { KeyboardArrowUpRounded } from "@mui/icons-material";
 import {
   Box,
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
   Container,
+  Fab,
   Grid2 as Grid,
+  Pagination,
   Paper,
-  Typography,
+  Skeleton,
 } from "@mui/material";
-import React, { Fragment } from "react";
-import { Restaurant } from "../../../shared/interface/user";
-import { faker } from "@faker-js/faker";
+import { ChangeEvent, useEffect } from "react";
+import { ScrollTop } from "../../../components/appbar/scroll-top";
 import RestaurantCard from "../../../features/home/components/restaurant-card";
-
-const TEMP_DATA: Restaurant[] = [
-  {
-    restaurantId: faker.string.uuid(),
-    name: faker.company.name(),
-    address: faker.location.streetAddress(),
-    email: faker.internet.email(),
-    phone: faker.phone.number(),
-    reservations: [],
-  },
-  {
-    restaurantId: faker.string.uuid(),
-    name: faker.company.name(),
-    address: faker.location.streetAddress(),
-    email: faker.internet.email(),
-    phone: faker.phone.number(),
-    reservations: [],
-  },
-  {
-    restaurantId: faker.string.uuid(),
-    name: faker.company.name(),
-    address: faker.location.streetAddress(),
-    email: faker.internet.email(),
-    phone: faker.phone.number(),
-    reservations: [],
-  },
-];
+import SearchForm from "../../../features/home/components/search-form";
+import useRestaurantListService from "../../../features/home/hooks/service/use-restaurant-list-service";
+import useRestaurantList from "../../../features/home/hooks/use-restaurant-list";
 
 const RestaurantList = () => {
+  const service = useRestaurantListService();
+
+  const {
+    isLoading,
+    restaurantList,
+    page: currentPage,
+    totalPages,
+    searchForm,
+    searchFormSubmit,
+    handleFilterChange,
+    handleQueryChange,
+    handleSubmitSearchForm,
+    handleSearch,
+  } = useRestaurantList(service);
+
+  useEffect(() => {
+    console.log(`current page: ${currentPage}`);
+  }, [currentPage]);
+
   return (
-    <Container>
-      <Grid mt={6} mr={2} ml={2} container spacing={3}>
-        <Grid size={{ xs: 12, md: 3 }}>
-          <Paper
-            variant="outlined"
-            sx={{
-              position: "sticky",
-              backgroundColor: "whitesmoke",
-              height: "80vh",
-            }}
-          ></Paper>
+    <>
+      <Container
+        maxWidth="xl"
+        sx={{ pt: 2, pb: 10, backgroundColor: "rgba(100, 100, 100, 0.035)" }}
+      >
+        <Grid mt={6} mr={2} ml={2} container spacing={3}>
+          <Grid size={{ xs: 12, md: 3 }}>
+            <Box sx={{ mt: 10, height: "100%" }}>
+              <Paper
+                variant="outlined"
+                sx={{
+                  position: "sticky",
+                  top: "20px",
+                  backgroundColor: "whitesmoke",
+                  height: "90vh",
+                }}
+              >
+                <SearchForm
+                  page={currentPage}
+                  searchFormSubmit={searchForm}
+                  onFilterChange={handleFilterChange}
+                  onQueryChange={handleQueryChange}
+                  onSearch={handleSearch}
+                  onSubmitForm={handleSubmitSearchForm}
+                />
+              </Paper>
+            </Box>
+          </Grid>
+          <Grid size={{ xs: 12, md: 9 }}>
+            <Box>
+              <Box>
+                <h1>Find Restaurant</h1>
+              </Box>
+              <Box mt={3}>
+                {isLoading
+                  ? Array.from({ length: 3 }).map((_, idx) => (
+                      <Skeleton
+                        key={idx}
+                        variant="rounded"
+                        width={"100%"}
+                        height={"300px"}
+                        sx={{ mt: 2 }}
+                        animation="wave"
+                      />
+                    ))
+                  : restaurantList.map((data, idx) => (
+                      <RestaurantCard key={idx} restaurant={data} />
+                    ))}
+              </Box>
+              <Box mt={3}>
+                <Pagination
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                  shape="rounded"
+                  count={totalPages}
+                  variant="outlined"
+                  size="large"
+                  color="primary"
+                  page={currentPage}
+                  onChange={async (e: ChangeEvent, page: number) => {
+                    if (page === currentPage) return;
+                    await handleSearch(
+                      page,
+                      searchFormSubmit.searchQuery,
+                      searchFormSubmit.filter
+                    );
+                  }}
+                />
+              </Box>
+            </Box>
+            <ScrollTop>
+              <Fab size="small" aria-label="scroll back to top">
+                <KeyboardArrowUpRounded />
+              </Fab>
+            </ScrollTop>
+          </Grid>
         </Grid>
-        <Grid size={{ xs: 12, md: 9 }}>
-          <Box>
-            <h2>Find Restaurant</h2>
-          </Box>
-          <Box mt={3}>
-            {TEMP_DATA.map((data, idx) => (
-              <RestaurantCard key={idx} restaurant={data} />
-            ))}
-          </Box>
-        </Grid>
-      </Grid>
-    </Container>
+      </Container>
+    </>
   );
 };
 

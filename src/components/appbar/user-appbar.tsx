@@ -51,7 +51,7 @@ const UserAppBar = () => {
   return (
     <AppBar position="static" color="primary">
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
+        <Toolbar disableGutters id="back-to-top-anchor">
           <MdToolbar pages={pages} onCloseNav={handleCloseNav} />
           <XsToolbar
             pages={pages}

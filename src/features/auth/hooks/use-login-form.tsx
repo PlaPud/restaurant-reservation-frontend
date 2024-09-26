@@ -1,16 +1,16 @@
 import { ChangeEvent, SyntheticEvent, useState } from "react";
-import { UserLoginData } from "../../../shared/interface/user";
+import { UserLoginReqBody } from "../../../shared/interface/user";
 import { useNavigate } from "react-router-dom";
 
 const useLoginForm = () => {
-  const [formData, setFormData] = useState<UserLoginData>({
+  const [formData, setFormData] = useState<UserLoginReqBody>({
     email: "",
     password: "",
   });
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-    const body: UserLoginData = formData;
+    const body: UserLoginReqBody = formData;
     console.log(body);
   };
 

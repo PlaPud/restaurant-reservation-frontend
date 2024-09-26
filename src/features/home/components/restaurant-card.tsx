@@ -8,10 +8,11 @@ import {
   Typography,
 } from "@mui/material";
 import { FC } from "react";
-import { Restaurant } from "../../../shared/interface/user";
+import { RestaurantResData } from "../../../shared/interface/user";
+import { getMockRestaurantImgSrc } from "../../../shared/utils/mock-utils";
 
 interface RestaurantCardProps {
-  restaurant: Restaurant;
+  restaurant: RestaurantResData;
 }
 
 const RestaurantCard: FC<RestaurantCardProps> = ({ restaurant }) => {
@@ -21,9 +22,7 @@ const RestaurantCard: FC<RestaurantCardProps> = ({ restaurant }) => {
         <CardMedia
           component={"img"}
           sx={{ height: "100%", width: "100%", objectFit: "cover" }}
-          src={`src/assets/restaurant/restaurant-img-${
-            Math.floor(Math.random() * 3) + 1
-          }.jpg`}
+          src={restaurant.profileimgPath}
         />
       </Box>
       <Box>
@@ -38,6 +37,12 @@ const RestaurantCard: FC<RestaurantCardProps> = ({ restaurant }) => {
           <Typography sx={{ color: "text.secondary", mb: 1.5 }}>
             {restaurant.address}
           </Typography>
+          <Typography sx={{ color: "text.secondary", mb: 1.5 }}>
+            ตำบล/แขวง {restaurant.subDistrict}, อำเภอ/เขต {restaurant.district}
+          </Typography>
+          <Typography sx={{ color: "text.secondary", mb: 1.5 }}>
+            {restaurant.province}
+          </Typography>
           <Typography variant="body2">
             well meaning and kindly.
             <br />
@@ -46,7 +51,9 @@ const RestaurantCard: FC<RestaurantCardProps> = ({ restaurant }) => {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="medium">Get Reservation Now</Button>
+          <Button variant="outlined" size="large">
+            จองโต๊ะร้านนี้
+          </Button>
         </CardActions>
       </Box>
     </Card>

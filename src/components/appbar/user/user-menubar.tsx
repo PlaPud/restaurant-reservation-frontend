@@ -7,7 +7,7 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-import { NavData } from "../user-appbar";
+import { NavData } from "../../../shared/interface/navbar";
 
 const UserMenuBar = ({ settings, userMenuEl, onOpenUser, onCloseUser }) => {
   return (

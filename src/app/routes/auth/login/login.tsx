@@ -2,7 +2,6 @@ import { Box, Container, Grid2 as Grid } from "@mui/material";
 import LoginForm from "../../../../features/auth/components/login-form";
 import useAuthService from "../../../../features/auth/hooks/service/use-auth-service";
 import useLogin from "../../../../features/auth/hooks/use-login";
-import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const service = useAuthService();
@@ -21,9 +20,15 @@ const Login = () => {
                 onLogin={handleLoginService}
               />
             </Box>
-            <Box className="register-link">
-              <p>don't have any account? </p>
-              <a href="/register">Sign Up</a>
+            <Box className="register-link" display={"inline-flex"}>
+              <Box marginRight={1}>
+                <p>ยังไม่มีบัญชี? </p>
+              </Box>
+              <Box>
+                <p>
+                  <a href="/register">ลงทะเบียนที่นี่</a>
+                </p>
+              </Box>
             </Box>
           </Grid>
           <Grid size={{ xs: 12, md: 6 }}></Grid>
