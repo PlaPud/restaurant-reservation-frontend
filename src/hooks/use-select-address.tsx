@@ -45,8 +45,6 @@ const useSelectAddress = (service: IThaiAddressService) => {
     const fetchDistricts = async () => {
       if (selectedAddress.province) {
         try {
-          console.log(selectedAddress.province);
-
           const data = await service.fetchDistrictsByProvince(
             selectedAddress.province.id
           );
@@ -104,9 +102,7 @@ const useSelectAddress = (service: IThaiAddressService) => {
     const subDistrict: SubDistrict = e.target.value as unknown as SubDistrict;
     if (subDistrict === selectedAddress.subDistrict) return;
     setSelectedAddress({ ...selectedAddress, subDistrict });
-    console.log(selectedAddress);
   };
-
   return {
     preFetchedProvinces,
     fetchedDistricts,
@@ -115,6 +111,7 @@ const useSelectAddress = (service: IThaiAddressService) => {
     handleChangeDistrict,
     handleChangeSubDistrict,
     selectedAddress,
+    setSelectedAddress,
   };
 };
 

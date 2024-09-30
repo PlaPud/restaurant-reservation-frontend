@@ -11,6 +11,7 @@ import Login from "./routes/auth/login/login";
 import Register from "./routes/auth/register/register";
 import LandingPage from "./routes/landing";
 import RestaurantList from "./routes/app/restaurant-list";
+import RestaurantEdit from "./routes/app/restaurant-edit";
 
 const theme = createTheme({
   palette: {
@@ -33,6 +34,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/home" element={<RestaurantList />} />
+          <Route path="/restaurant/edit" element={<RestaurantEdit />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

@@ -15,8 +15,6 @@ export class ThaiAddressAxiosService implements IThaiAddressService {
       const res = await axios.get(`${BACKEND_URL}/address/provinces`);
       const { data } = res.data;
 
-      console.log(data);
-
       return data.map((p) => p as Province);
     } catch (err) {
       console.error(err);
@@ -31,8 +29,6 @@ export class ThaiAddressAxiosService implements IThaiAddressService {
       );
       const { data } = res.data;
 
-      console.log(data);
-
       return data.map((d) => d as District);
     } catch (err) {
       console.error(err);
@@ -46,8 +42,6 @@ export class ThaiAddressAxiosService implements IThaiAddressService {
         `${BACKEND_URL}/address/sub-districts/${district_id}`
       );
       const { data } = res.data;
-
-      console.log(data);
 
       return data.map((sd) => sd as SubDistrict);
     } catch (err) {

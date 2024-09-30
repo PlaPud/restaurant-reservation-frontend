@@ -2,6 +2,7 @@ import { Box, Container, Grid2 as Grid } from "@mui/material";
 import RegisterForm from "../../../../features/auth/components/register-form";
 import useAuthService from "../../../../features/auth/hooks/service/use-auth-service";
 import useRegister from "../../../../features/auth/hooks/use-register";
+import { Role } from "../../../../shared/enum/role";
 
 const Register = () => {
   const service = useAuthService();
@@ -19,6 +20,7 @@ const Register = () => {
               <RegisterForm
                 isSubmitting={isSubmitting}
                 onRegister={handleRegisterService}
+                defaultRole={Role.Customer}
               />
             </Box>
             <Box className="login-link" display={"inline-flex"}>

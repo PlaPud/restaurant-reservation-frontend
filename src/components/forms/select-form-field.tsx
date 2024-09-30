@@ -1,5 +1,10 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import React from "react";
+import {
+  District,
+  Province,
+  SubDistrict,
+} from "../../shared/interface/address";
 
 const SelectFormField = ({
   id,
@@ -15,7 +20,7 @@ const SelectFormField = ({
       <Select
         labelId={`select-${name}-label`}
         id={id}
-        value={selectedValue ?? ""}
+        value={selectedValue || ""}
         label={label}
         name={name}
         disabled={!items}
