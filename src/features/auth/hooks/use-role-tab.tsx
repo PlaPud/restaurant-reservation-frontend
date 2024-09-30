@@ -1,20 +1,19 @@
-import { SyntheticEvent, useState } from 'react'
-import { Role } from '../../../shared/enum/role'
+import { SyntheticEvent, useState } from "react";
+import { Role } from "../../../shared/enum/role";
 
-const useRoleTab = () => {
-  
-  const [role, setRole] = useState(Role.Customer)
-  
+const useRoleTab = (defaultRole: Role = Role.Customer) => {
+  const [role, setRole] = useState(defaultRole);
+
   const handleChangeRoleTab = (e: SyntheticEvent, value: Role) => {
-    setRole(value)
-    console.log(value)
+    setRole(value);
+    console.log(value);
 
     e.preventDefault();
-  }
+  };
 
   // const
 
-  return {role, handleChangeRoleTab}
-}
+  return { role, handleChangeRoleTab };
+};
 
-export default useRoleTab
+export default useRoleTab;

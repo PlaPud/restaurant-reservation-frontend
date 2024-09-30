@@ -53,8 +53,6 @@ const useSearchForm = (
 
     const { name, value } = e.target;
 
-    // console.log(name, value);
-
     onQueryChange(name, value);
   };
 

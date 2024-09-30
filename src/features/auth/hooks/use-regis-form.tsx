@@ -56,7 +56,6 @@ const useRegisForm = <T extends CustomerRegisData | RestaurantRegisData>(
         : "",
     };
 
-    // console.log(addressNameTH);
     setFormData({ ...formData, ...addressNameTH });
   }, [selectedAddress]);
 
