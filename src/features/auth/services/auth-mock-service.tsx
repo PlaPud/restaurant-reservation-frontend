@@ -30,7 +30,7 @@ export class AuthMockService implements IAuthService {
       address: "123 Sample St., NYC",
       email: "papa.j@mail.com",
       phone: "1112223334",
-      currentReserves: [],
+      reservations: [],
       subDistrict: "",
       district: "",
       province: "",
@@ -96,7 +96,7 @@ export class AuthMockService implements IAuthService {
     const newRestaurant: RestaurantResData = {
       restaurantId: String(topIdx + 1),
       ...formData,
-      currentReserves: [],
+      reservations: [],
       profileimgPath: "",
       description: "",
     };

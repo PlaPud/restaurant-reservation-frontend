@@ -57,8 +57,6 @@ const useSearchForm = (
   };
 
   return {
-    // searchForm,
-    // searchFormSubmit,
     preFetchedProvinces,
     fetchedDistricts,
     fetchedSubDists,
@@ -66,7 +64,6 @@ const useSearchForm = (
     handleChangeProvince,
     handleChangeDistrict,
     handleChangeSubDistrict,
-    // handleSubmitSearchForm,
     selectedAddress,
   };
 };

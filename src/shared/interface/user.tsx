@@ -10,7 +10,7 @@ export interface CustomerResData {
   email: string;
   phone: string;
   profileImgPath: string;
-  reservations: ReservationResData[];
+  reservations?: ReservationResData[];
 }
 
 export interface ReservationResData {
@@ -39,5 +39,5 @@ export interface RestaurantResData {
   province: string;
   profileimgPath: string;
   description: string;
-  currentReserves: ReservationResData[];
+  reservations?: ReservationResData[];
 }

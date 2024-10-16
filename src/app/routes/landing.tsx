@@ -7,7 +7,7 @@ const LandingPage = () => {
     <>
       <Container className="landing-body">
         <h1 className="title">Restaurant Reserve</h1>
-        <h2 className="title-desc">Book you restaurant now!</h2>
+        <h2 className="title-desc">จองคิวร้านอาหารได้ ทันใจ ทันที!</h2>
         <div>
           <Button
             href="/home"
@@ -16,7 +16,7 @@ const LandingPage = () => {
             size="large"
             disableRipple={true}
           >
-            Enter Site
+            เข้าสู่เว็บไซต์
           </Button>
         </div>
       </Container>

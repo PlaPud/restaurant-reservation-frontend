@@ -1,5 +1,5 @@
 import { Box, Grid2 as Grid } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { GeneralInputField } from "../general-form-field";
 import SelectFormField from "../select-form-field";
 import PasswordInputField from "../password-input-field";
@@ -22,6 +22,10 @@ const RestaurantDataForm = ({
   data = {} as RestaurantEditData,
   includePassword = true,
 }) => {
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
+
   return (
     <>
       <Box mt={1}>
