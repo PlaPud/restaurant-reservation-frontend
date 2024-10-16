@@ -1,4 +1,5 @@
 import { FormControl, InputLabel, OutlinedInput } from "@mui/material";
+import { useEffect, useState } from "react";
 
 export const GeneralInputField = ({
   required = false,
@@ -9,21 +10,38 @@ export const GeneralInputField = ({
   name,
   label,
 }) => {
+  const [isFocused, setIsFocused] = useState(false);
+  const [inputValue, setInputValue] = useState(value);
+
+  const handleChange = (e) => {
+    setInputValue(e.target.value);
+    onChange(e); // Call the passed onChange function
+  };
+
+  // useEffect(() => {
+  //   console.log(inputValue);
+  // }, [inputValue]);
+
   return (
-    <FormControl fullWidth={true}>
-      <InputLabel htmlFor={id} shrink={Boolean(value)}>
+    <FormControl fullWidth>
+      <InputLabel
+        htmlFor={id}
+        shrink={Boolean(inputValue ?? value) || isFocused}
+      >
         {label}
       </InputLabel>
       <OutlinedInput
-        defaultValue={value}
-        value={value}
+        defaultValue={inputValue ?? value}
+        value={inputValue ?? value}
         required={required}
         name={name}
         id={id}
-        onChange={onChange}
-        fullWidth={true}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
+        onChange={handleChange}
         label={label}
         type={type}
+        fullWidth
       />
     </FormControl>
   );

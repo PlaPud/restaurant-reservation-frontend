@@ -1,5 +1,5 @@
 * {
-  font-family: "Roboto", sans-serif;
+  font-family: "Prompt", "Roboto", sans-serif;
 }
 
 /* Box sizing rules */
@@ -94,4 +94,29 @@ textarea:not([rows]) {
 /* Anything that has been anchored to should have extra scroll margin */
 :target {
   scroll-margin-block: 5ex;
+}
+
+@font-face {
+  font-family: "Prompt";
+  src: url("./assets/fonts/Prompt/Prompt-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Prompt";
+  src: url("./assets/fonts/Prompt/Prompt-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+}
+
+// @font-face {
+//   font-family: "Prompt";
+//   src: url("./assets/fonts/Prompt/Prompt-Bold.ttf") format("truetype");
+//   font-weight: 700;
+//   font-style: normal;
+// }
+
+body {
+  font-family: "MyCustomFont", sans-serif;
 }
