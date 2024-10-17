@@ -44,7 +44,9 @@ export const getMockRestaurantData = (
     province: faker.location.state(),
     profileimgPath: "",
     description: faker.lorem.lines(2),
-    reservations: displayReservation ?? undefined,
+    reservation: displayReservation ?? undefined,
+    paymentInfo:
+      faker.finance.accountNumber() + " - " + faker.person.fullName(),
   };
   return mockData;
 };

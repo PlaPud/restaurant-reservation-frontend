@@ -16,6 +16,8 @@ import RestaurantList from "./routes/app/restaurant-list";
 import Login from "./routes/auth/login/login";
 import Register from "./routes/auth/register/register";
 import LandingPage from "./routes/landing";
+import RestaurantPage from "./routes/app/restaurant-page";
+import MakeReservation from "./routes/app/client-reservation/make-reservation";
 const theme = createTheme({
   palette: {
     primary: {
@@ -45,6 +47,14 @@ function App() {
             <Route
               path="/restaurant/reservation"
               element={<OrganizeReservation />}
+            />
+            <Route
+              path="/restaurant/:restaurantId/reserve/:reserveId"
+              element={<MakeReservation />}
+            />
+            <Route
+              path="/restaurant/:restaurantId"
+              element={<RestaurantPage />}
             />
           </Routes>
         </LocalizationProvider>

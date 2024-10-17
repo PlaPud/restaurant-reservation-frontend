@@ -18,6 +18,7 @@ export interface RestaurantEditData {
   district: string;
   province: string;
   description: string;
+  paymentInfo: string;
 }
 
 const useRestEditForm = (
@@ -49,13 +50,6 @@ const useRestEditForm = (
   } = useSelectAddress(addressService);
 
   useEffect(() => {
-    // if (
-    //   !selectedAddress.province &&
-    //   !selectedAddress.district &&
-    //   !selectedAddress.subDistrict
-    // )
-    //   return;
-
     const addressNameTH = {
       province: selectedAddress.province
         ? selectedAddress.province.name_th
@@ -92,6 +86,7 @@ const useRestEditForm = (
           district: data.district,
           province: data.province,
           description: data.description,
+          paymentInfo: data.paymentInfo,
         });
         setFormData({
           name: data.name,
@@ -102,6 +97,7 @@ const useRestEditForm = (
           district: data.district,
           province: data.province,
           description: data.description,
+          paymentInfo: data.paymentInfo,
         });
         setImgPath(data.profileImgPath);
         console.log(data);
