@@ -39,5 +39,6 @@ export interface RestaurantResData {
   province: string;
   profileimgPath: string;
   description: string;
-  reservations?: ReservationResData[];
+  paymentInfo: string;
+  reservation?: ReservationResData[];
 }

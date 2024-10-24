@@ -57,7 +57,7 @@ export class RestaurantListMockService implements IRestaurantListService {
         subDistrict: faker.location.street(),
         email: faker.internet.email(),
         phone: faker.phone.number(),
-        reservations: [],
+        reservation: [],
         profileimgPath: getMockRestaurantImgSrc(),
         description: faker.lorem.lines(5),
       };

@@ -26,7 +26,6 @@ const RestaurantEdit = () => {
     fetchedSubDists,
     selectedAddress,
     isDataChanged,
-
     handleTextInputChange,
     handleChangeProvince,
     handleChangeDistrict,
@@ -35,7 +34,6 @@ const RestaurantEdit = () => {
     handleRemoveFile,
     handleDeleteCover,
     handleCancelBtnClicked,
-
     handleSubmitRestaurant,
   } = useRestaurantEdit();
 
@@ -110,6 +108,20 @@ const RestaurantEdit = () => {
                     fullWidth
                     multiline
                     rows={2}
+                  />
+                </Box>
+              </Box>
+              <Box mb={4}>
+                <h2>ช่องทางการชำระเงิน</h2>
+                <Box mt={2}>
+                  <TextField
+                    name="paymentInfo"
+                    onChange={handleTextInputChange}
+                    defaultValue={formData ? formData.paymentInfo : ""}
+                    placeholder="เพิ่มข้อมูลการชำระเงิน"
+                    fullWidth
+                    multiline
+                    rows={1}
                   />
                 </Box>
               </Box>
