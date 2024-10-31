@@ -16,12 +16,17 @@ import {
 } from "../../../shared/interface/address";
 import useImageService from "../../../hooks/services/use-image-service";
 import { useNavigate } from "react-router-dom";
+import { IRestaurantEditService } from "../services/restaurant-edit-service.interface";
+import { IImageService } from "../../../services/img/image-service.interface";
+import { IUserService } from "../../../services/user/user-service.interface";
+import { IThaiAddressService } from "../../../services/address/thai-address-service.interface";
 
-const useRestaurantEdit = () => {
-  const addressService = new ThaiAddressAxiosService();
-  const service = useRestaurantEditService();
-  const imgService = useImageService();
-
+const useRestaurantEdit = (
+  service: IRestaurantEditService,
+  userService: IUserService,
+  imgService: IImageService,
+  addressService: IThaiAddressService
+) => {
   const navigate = useNavigate();
 
   const {
@@ -38,12 +43,12 @@ const useRestaurantEdit = () => {
     handleChangeDistrict,
     handleChangeSubDistrict,
     clearFormFields,
-  } = useRestEditForm(addressService, service);
+  } = useRestEditForm(userService, addressService);
 
   const [fileName, setFileName] = useState<string | null>(null);
   const [imgUrl, setImgUrl] = useState("");
 
-  const fileFormRef = useRef<HTMLInputElement | null>(null);
+  const imgFileRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     if (imgPath === "") return;
@@ -86,8 +91,8 @@ const useRestaurantEdit = () => {
 
   const handleRemoveFile = () => {
     setFileName(null);
-    if (!fileFormRef.current) return;
-    fileFormRef.current.value = "";
+    if (!imgFileRef.current) return;
+    imgFileRef.current.value = "";
   };
 
   const handleDeleteCover = async () => {
@@ -98,7 +103,7 @@ const useRestaurantEdit = () => {
   const handleSubmitRestaurant = async () => {
     const res = await service.updateRestaurant(
       formData,
-      fileFormRef.current?.files[0]
+      imgFileRef.current?.files[0]
     );
     navigate(0);
   };
@@ -151,7 +156,7 @@ const useRestaurantEdit = () => {
     formData,
     imgUrl,
     fileName,
-    fileFormRef,
+    imgFileRef,
     preFetchedProvinces,
     fetchedDistricts,
     fetchedSubDists,

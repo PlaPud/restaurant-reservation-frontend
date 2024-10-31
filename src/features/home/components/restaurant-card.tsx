@@ -12,17 +12,21 @@ import { RestaurantResData } from "../../../shared/interface/user";
 import { getMockRestaurantImgSrc } from "../../../shared/utils/mock-utils";
 
 interface RestaurantCardProps {
+  onCardBtnClick: (id: string) => Promise<void>;
   restaurant: RestaurantResData;
 }
 
-const RestaurantCard: FC<RestaurantCardProps> = ({ restaurant }) => {
+const RestaurantCard: FC<RestaurantCardProps> = ({
+  restaurant,
+  onCardBtnClick,
+}) => {
   return (
     <Card variant="outlined" sx={{ mt: "20px", display: "flex" }}>
       <Box width={240}>
         <CardMedia
           component={"img"}
           sx={{ height: "100%", width: "100%", objectFit: "cover" }}
-          src={restaurant.profileimgPath}
+          src={restaurant.profileImgPath}
         />
       </Box>
       <Box>
@@ -51,7 +55,11 @@ const RestaurantCard: FC<RestaurantCardProps> = ({ restaurant }) => {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button variant="outlined" size="large">
+          <Button
+            onClick={() => onCardBtnClick(restaurant.restaurantId)}
+            variant="outlined"
+            size="large"
+          >
             จองโต๊ะร้านนี้
           </Button>
         </CardActions>
