@@ -1,4 +1,3 @@
-import { Upload } from "@mui/icons-material";
 import {
   Box,
   Button,
@@ -9,18 +8,25 @@ import {
 } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import RestaurantDataForm from "../../../components/forms/group/restaurant-data-form";
-import RestaurantCoverCard from "../../../features/restaurant-edit/components/restaurant-cover-card";
 import UploadFileButton from "../../../components/forms/upload-file-button";
+import RestaurantCoverCard from "../../../features/restaurant-edit/components/restaurant-cover-card";
+import useRestaurantEditService from "../../../features/restaurant-edit/hooks/service/use-restaurant-edit-service";
 import useRestaurantEdit from "../../../features/restaurant-edit/hooks/use-restaurant-edit";
-import temp_cover from "E:/PlaPud/Code/restaurant-reserve-frontend/src/assets/restaurant/restaurant-img-1.jpg";
-import { useNavigate } from "react-router-dom";
+import useImageService from "../../../hooks/services/use-image-service";
+import useThaiAddressService from "../../../hooks/services/use-thai-address-service";
+import useUserService from "../../../hooks/services/use-user-service";
 
 const RestaurantEdit = () => {
+  const service = useRestaurantEditService();
+  const userService = useUserService();
+  const imgService = useImageService();
+  const thaiAddressService = useThaiAddressService();
+
   const {
     formData,
     imgUrl,
     fileName,
-    fileFormRef,
+    imgFileRef,
     preFetchedProvinces,
     fetchedDistricts,
     fetchedSubDists,
@@ -35,7 +41,7 @@ const RestaurantEdit = () => {
     handleDeleteCover,
     handleCancelBtnClicked,
     handleSubmitRestaurant,
-  } = useRestaurantEdit();
+  } = useRestaurantEdit(service, userService, imgService, thaiAddressService);
 
   return (
     <>
@@ -81,7 +87,7 @@ const RestaurantEdit = () => {
                   <Box mt={3}>
                     <UploadFileButton
                       fileName={fileName}
-                      formRef={fileFormRef}
+                      formRef={imgFileRef}
                       onChange={handleFileAttach}
                       onRemoveFile={handleRemoveFile}
                     />

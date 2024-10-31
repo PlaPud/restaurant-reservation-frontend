@@ -28,6 +28,7 @@ const RestaurantList = () => {
     handleFilterChange,
     handleQueryChange,
     handleSubmitSearchForm,
+    handleEachCardBtnClicked,
     handleSearch,
   } = useRestaurantList(service);
 
@@ -67,7 +68,7 @@ const RestaurantList = () => {
           <Grid size={{ xs: 12, md: 9 }}>
             <Box>
               <Box>
-                <h1>Find Restaurant</h1>
+                <h1>ร้านอาหารทั้งหมด</h1>
               </Box>
               <Box mt={3}>
                 {isLoading
@@ -82,7 +83,11 @@ const RestaurantList = () => {
                       />
                     ))
                   : restaurantList.map((data, idx) => (
-                      <RestaurantCard key={idx} restaurant={data} />
+                      <RestaurantCard
+                        key={idx}
+                        restaurant={data}
+                        onCardBtnClick={handleEachCardBtnClicked}
+                      />
                     ))}
               </Box>
               <Box mt={3}>

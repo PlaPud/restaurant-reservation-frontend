@@ -34,7 +34,7 @@ export class AuthMockService implements IAuthService {
       subDistrict: "",
       district: "",
       province: "",
-      profileimgPath: "",
+      profileImgPath: "",
       description: "",
     },
   ];
@@ -97,7 +97,7 @@ export class AuthMockService implements IAuthService {
       restaurantId: String(topIdx + 1),
       ...formData,
       reservation: [],
-      profileimgPath: "",
+      profileImgPath: "",
       description: "",
     };
 

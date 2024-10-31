@@ -37,7 +37,7 @@ export interface RestaurantResData {
   subDistrict: string;
   district: string;
   province: string;
-  profileimgPath: string;
+  profileImgPath: string;
   description: string;
   paymentInfo: string;
   reservation?: ReservationResData[];

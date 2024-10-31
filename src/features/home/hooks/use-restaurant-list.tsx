@@ -3,6 +3,7 @@ import { RestaurantResData } from "../../../shared/interface/user";
 import { IRestaurantListService } from "../services/restaurant-list-service.interface";
 import useToggle from "../../../hooks/use-toggle";
 import { IFilterRestaurant } from "../../../shared/interface/search";
+import { useNavigate } from "react-router-dom";
 
 export interface SearchForm {
   searchQuery: string;
@@ -26,6 +27,8 @@ const useRestaurantList = (service: IRestaurantListService) => {
     searchQuery: "",
     filter: {},
   });
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -78,17 +81,21 @@ const useRestaurantList = (service: IRestaurantListService) => {
     }
   };
 
-  const handleFilterChange = (filter: IFilterRestaurant) =>
+  const handleFilterChange = async (filter: IFilterRestaurant) =>
     setSearchForm({ ...searchForm, filter });
 
-  const handleQueryChange = (name: string, value: string) =>
+  const handleQueryChange = async (name: string, value: string) =>
     setSearchForm({
       ...searchForm,
       [name]: value,
     });
 
-  const handleSubmitSearchForm = () => {
+  const handleSubmitSearchForm = async () => {
     setSearchFormSubmit({ ...searchForm });
+  };
+
+  const handleEachCardBtnClicked = async (id: string) => {
+    navigate(`/restaurant/${id}`);
   };
 
   return {
@@ -101,6 +108,7 @@ const useRestaurantList = (service: IRestaurantListService) => {
     handleFilterChange,
     handleQueryChange,
     handleSubmitSearchForm,
+    handleEachCardBtnClicked,
     handleSearch,
   };
 };

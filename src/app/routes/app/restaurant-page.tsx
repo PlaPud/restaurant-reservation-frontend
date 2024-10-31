@@ -19,6 +19,7 @@ import useRestaurantPageService from "../../../features/restaurant-page/hooks/se
 import useRestaurantPage from "../../../features/restaurant-page/hooks/use-restaurant-page";
 import { LOREM } from "../../../shared/utils/mock-utils";
 import { MouseEvent } from "react";
+import LoadingBackdrop from "../../../components/loading/loading-backdrop";
 
 const RestaurantPage = () => {
   const service = useRestaurantPageService();
@@ -105,17 +106,7 @@ const RestaurantPage = () => {
           <KeyboardArrowUpRounded />
         </Fab>
       </ScrollTop>
-      {hook.isLoading && (
-        <Backdrop
-          sx={(theme) => ({
-            color: "#fff00",
-            zIndex: theme.zIndex.drawer + 1,
-          })}
-          open={true}
-        >
-          <CircularProgress color="primary" />
-        </Backdrop>
-      )}
+      <LoadingBackdrop isLoading={hook.isLoading} />
     </>
   );
 };

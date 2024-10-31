@@ -8,6 +8,7 @@ import {
 } from "../../../shared/interface/address";
 import { IRestaurantEditService } from "../services/restaurant-edit-service.interface";
 import useToggle from "../../../hooks/use-toggle";
+import { IUserService } from "../../../services/user/user-service.interface";
 
 export interface RestaurantEditData {
   name: string;
@@ -22,8 +23,9 @@ export interface RestaurantEditData {
 }
 
 const useRestEditForm = (
+  userService: IUserService,
+  // service: IRestaurantEditService,
   addressService: IThaiAddressService,
-  service: IRestaurantEditService,
   defaultForm?: RestaurantEditData
 ) => {
   const { toggle: isLoading, handleToggle: toggleLoading } = useToggle(true);
@@ -75,7 +77,7 @@ const useRestEditForm = (
     const fetchData = async () => {
       try {
         if (!isLoading) toggleLoading();
-        const data = await service.fetchRestaurant();
+        const data = await userService.fetchUserRestaurant();
         console.log(data);
         setOriginalData({
           name: data.name,

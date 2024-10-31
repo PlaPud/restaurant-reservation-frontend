@@ -42,7 +42,7 @@ export const getMockRestaurantData = (
     subDistrict: faker.location.county(),
     district: faker.location.city(),
     province: faker.location.state(),
-    profileimgPath: "",
+    profileImgPath: "",
     description: faker.lorem.lines(2),
     reservation: displayReservation ?? undefined,
     paymentInfo:
