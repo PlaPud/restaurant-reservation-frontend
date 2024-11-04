@@ -25,10 +25,14 @@ import {
   DateTimeValidationError,
 } from "@mui/x-date-pickers";
 import EditReserveModal from "../../../../features/reservation-org/components/edit-reserve-modal";
+import LoadingBackdrop from "../../../../components/loading/loading-backdrop";
+import InspectSlipPopup from "../../../../components/popup/inspect-slip-popup";
+import useImageService from "../../../../hooks/services/use-image-service";
 
 const OrganizeReservation = () => {
   const service = useOrganizeReserveService();
-  const hook = useOrganizeReservation(service);
+  const imgService = useImageService();
+  const hook = useOrganizeReservation(service, imgService);
 
   const tabs = [
     { index: 0, title: "สถานะ ยังไม่มีการจอง" },
@@ -80,17 +84,7 @@ const OrganizeReservation = () => {
             </Box>
           </Grid>
           <Grid size={{ xs: 12, md: 8 }}>
-            {hook.isLoading && (
-              <Backdrop
-                sx={(theme) => ({
-                  color: "#fff00",
-                  zIndex: theme.zIndex.drawer + 1,
-                })}
-                open={true}
-              >
-                <CircularProgress color="primary" />
-              </Backdrop>
-            )}
+            <LoadingBackdrop isLoading={hook.isLoading} />
             <Box>
               <h2>จัดการรายการจอง</h2>
               <Grid alignItems={"center"} container spacing={2} mt={2}>
@@ -181,6 +175,11 @@ const OrganizeReservation = () => {
           text={"ต้องการลบรายการจองนี้"}
           onConfirm={hook.handleConfirmDelete}
           onClose={hook.handleCloseDelModal}
+        />
+        <InspectSlipPopup
+          imgUrl={hook.imgUrl}
+          isOpen={hook.isInspectSlip}
+          onClose={hook.handleInspectSlipClosed}
         />
       </Container>
     </>

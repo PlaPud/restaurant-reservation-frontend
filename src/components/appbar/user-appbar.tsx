@@ -4,23 +4,35 @@ import MdToolbar from "./toolbar/md-toolbar";
 import XsToolbar from "./toolbar/xs-toolbar";
 import UserMenuBar from "./user/user-menubar";
 import { NavData } from "../../shared/interface/navbar";
+import {
+  Edit,
+  EventAvailable,
+  Home,
+  Logout,
+  Person,
+  Storefront,
+} from "@mui/icons-material";
 
 const pages: Record<string, NavData> = {
   home: {
     title: "Home",
     route: "/home",
+    itemIcon: <Home />,
   },
   myReservations: {
-    title: "My Reservations",
-    route: "/my-reservations",
+    title: "การจองของฉัน",
+    route: "/my-reservation",
+    itemIcon: <EventAvailable />,
   },
   reservations: {
-    title: "Reservations",
-    route: "/reservations",
+    title: "จัดการคิวจอง",
+    route: "/restaurant/reservation",
+    itemIcon: <Edit />,
   },
   restaurantPage: {
-    title: "Restaurant Page",
+    title: "โปรไฟล์ร้านอาหาร",
     route: "/restaurant",
+    itemIcon: <Storefront />,
   },
 };
 
@@ -28,10 +40,12 @@ const settings: Record<string, NavData> = {
   myAccount: {
     title: "My Account",
     route: "/account",
+    itemIcon: <Person />,
   },
   signOut: {
     title: "Sign Out",
     route: "/",
+    itemIcon: <Logout />,
   },
 };
 

@@ -2,6 +2,7 @@ import { FoodBankRounded, Menu } from "@mui/icons-material";
 import {
   Box,
   IconButton,
+  ListItemIcon,
   MenuItem,
   Menu as MenuToolbar,
   Typography,
@@ -40,11 +41,16 @@ const XsToolbar = ({ pages, navEl, onOpenNav, onCloseNav }) => {
         >
           {Object.values(pages).map((page: NavData) => (
             <MenuItem key={page.title} onClick={onCloseNav}>
+              <ListItemIcon>{page.itemIcon}</ListItemIcon>
               <Typography
                 component={"a"}
                 href={page.route}
                 fontSize={"large"}
-                sx={{ textAlign: "center" }}
+                sx={{
+                  textAlign: "center",
+                  textDecoration: "none",
+                  color: "black",
+                }}
               >
                 {page.title}
               </Typography>
