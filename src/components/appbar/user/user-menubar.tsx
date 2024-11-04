@@ -21,6 +21,7 @@ const UserMenuBar = ({ settings, userMenuEl, onOpenUser, onCloseUser }) => {
         sx={{ mt: "45px" }}
         id="menu-appbar"
         anchorEl={userMenuEl}
+        variant="menu"
         anchorOrigin={{
           vertical: "top",
           horizontal: "right",
@@ -42,9 +43,16 @@ const UserMenuBar = ({ settings, userMenuEl, onOpenUser, onCloseUser }) => {
             <Typography
               component={"a"}
               href={setting.route}
-              sx={{ textAlign: "center" }}
+              sx={{
+                textAlign: "center",
+                alignItems: "center",
+                display: "flex",
+                textDecoration: "none",
+                color: "black",
+              }}
             >
-              {setting.title}
+              {setting.itemIcon}
+              <Box ml={1}>{setting.title}</Box>
             </Typography>
           </MenuItem>
         ))}

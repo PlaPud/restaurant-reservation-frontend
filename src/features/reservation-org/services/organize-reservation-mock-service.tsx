@@ -11,6 +11,7 @@ import {
   getMockCustomerData,
   getMockReservationData,
   getMockRestaurantData,
+  getRandomActionReservation,
   isFullNameMatched,
 } from "../../../shared/utils/mock-utils";
 
@@ -18,9 +19,9 @@ export class OrganizeReservationMockService
   implements IOrganizeReservationService
 {
   private readonly _reservations = {
-    1: Array.from({ length: 10 }, getMockReservationData),
-    2: Array.from({ length: 10 }, getMockReservationData),
-    3: Array.from({ length: 4 }, getMockReservationData),
+    1: Array.from({ length: 10 }, getRandomActionReservation),
+    2: Array.from({ length: 10 }, getRandomActionReservation),
+    3: Array.from({ length: 4 }, getRandomActionReservation),
   };
 
   public async editReservation(

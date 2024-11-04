@@ -1,21 +1,24 @@
-import React, { ChangeEvent, SyntheticEvent, useEffect, useState } from "react";
+import {
+  DateTimeValidationError,
+  PickerChangeHandlerContext,
+} from "@mui/x-date-pickers";
+import { ChangeEvent, useEffect, useState } from "react";
+import useToggle from "../../../hooks/use-toggle";
+import { DEFAULT_FORM_RESERVE } from "../../../shared/constants";
+import { ReservationResData } from "../../../shared/interface/user";
+import { ReservationFormData } from "../components/create-reserve-modal";
 import {
   IOrganizeReservationService,
   ReservationCreateData,
   ReservationPagedResponse,
 } from "../services/organize-reservation-service.interface";
-import { ReservationResData } from "../../../shared/interface/user";
-import useToggle from "../../../hooks/use-toggle";
-import useSearchForm from "../../home/hooks/use-search-form";
-import { ReservationFormData } from "../components/create-reserve-modal";
-import {
-  DateTimeValidationError,
-  PickerChangeHandlerContext,
-} from "@mui/x-date-pickers";
-import { addHours, roundToNearestHours } from "date-fns";
-import { DEFAULT_FORM_RESERVE } from "../../../shared/constants";
+import useInspectSlip from "../../../hooks/popup/use-inspect-slip";
+import { IImageService } from "../../../services/img/image-service.interface";
 
-const useOrganizeReservation = (service: IOrganizeReservationService) => {
+const useOrganizeReservation = (
+  service: IOrganizeReservationService,
+  imgService: IImageService
+) => {
   const [tabIndex, setTabIndex] = useState<number>(1);
 
   const [formData, setFormData] =
@@ -44,6 +47,13 @@ const useOrganizeReservation = (service: IOrganizeReservationService) => {
 
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [searchQSubmit, setSearchQsubmit] = useState<string>("");
+
+  const {
+    isInspectSlip,
+    imgUrl,
+    handleInspectSlipClicked,
+    handleInspectSlipClosed,
+  } = useInspectSlip(imgService);
 
   const tabFetchers: Record<
     number,
@@ -174,8 +184,6 @@ const useOrganizeReservation = (service: IOrganizeReservationService) => {
     toggleCancelModal();
   };
 
-  const handleInspectSlipClicked = async () => {};
-
   const handleEditBtnClicked = async (reservation: ReservationResData) => {
     setSelectedItem(reservation);
     setEditFormData({
@@ -199,7 +207,7 @@ const useOrganizeReservation = (service: IOrganizeReservationService) => {
       reserveDate: Math.floor(editFormData.reserveDate / 1000),
     };
 
-    const { restaurant, ...body } = editted;
+    const { restaurant, customer, ...body } = editted;
 
     toggleEditModal();
     toggleLoading();
@@ -297,12 +305,14 @@ const useOrganizeReservation = (service: IOrganizeReservationService) => {
     isEditModalOpen,
     isDeleteModalOpen,
     isCancelModalOpen,
+    isInspectSlip,
     tabIndex,
     displayItems,
     currentPage,
     totalPages,
     searchQuery,
     searchQSubmit,
+    imgUrl,
     handleSearchBtnClicked,
     handleInspectSlipClicked,
     handleCreateBtnClicked,
@@ -321,6 +331,7 @@ const useOrganizeReservation = (service: IOrganizeReservationService) => {
     handleCloseDelModal,
     handleCloseCancelModal,
     handleCloseEditModal,
+    handleInspectSlipClosed,
     handleFetch,
     handleQueryChange,
     handleSubmitReserve,

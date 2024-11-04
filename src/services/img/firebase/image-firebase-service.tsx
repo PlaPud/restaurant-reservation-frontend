@@ -5,6 +5,7 @@ import { storage } from "./firebase-init";
 export class ImageFireBaseService implements IImageService {
   public async fetchImageUrl(imgPath: string): Promise<string> {
     try {
+      console.log(imgPath);
       const imageRef = ref(storage, imgPath);
       const url = await getDownloadURL(imageRef);
       console.log("Image URL: ", url);

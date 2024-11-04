@@ -4,17 +4,19 @@ import ReservationCard from "./reservation-card";
 
 interface Props {
   collections: ReservationResData[];
-  onEachEditClick: (value?: any) => Promise<void>;
-  onEachDelClick: (value?: any) => Promise<void>;
-  onEachApproveClick: (value?: any) => Promise<void>;
-  onEachCheckAttendClick: (value?: any) => Promise<void>;
-  onEachCancelClick: (value?: any) => Promise<void>;
-  onEachInspectSlipClick: (value?: any) => Promise<void>;
+  isCustomerView?: boolean;
+  onEachEditClick?: (value?: any) => Promise<void>;
+  onEachDelClick?: (value?: any) => Promise<void>;
+  onEachApproveClick?: (value?: any) => Promise<void>;
+  onEachCheckAttendClick?: (value?: any) => Promise<void>;
+  onEachCancelClick?: (value?: any) => Promise<void>;
+  onEachInspectSlipClick?: (value?: any) => Promise<void>;
 }
 
 const ReservationCardList = (props: Props) => {
   const {
     collections,
+    isCustomerView,
     onEachEditClick,
     onEachDelClick,
     onEachApproveClick,
@@ -29,12 +31,13 @@ const ReservationCardList = (props: Props) => {
         ? collections.map((reservation) => (
             <Box mt={2} key={reservation.reserveId}>
               <ReservationCard
+                isCustomerView={isCustomerView}
                 reservation={reservation}
                 onEditBtnClicked={async () => {
                   await onEachEditClick(reservation);
                 }}
                 onInspectSlipBtnClicked={async () => {
-                  await onEachInspectSlipClick(reservation);
+                  await onEachInspectSlipClick(reservation.payImgUrl);
                 }}
                 onApproveBtnClicked={async () => {
                   reservation.isPayed

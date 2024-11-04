@@ -29,6 +29,7 @@ const MdToolbar = ({ pages, onCloseNav }) => {
       <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
         {Object.values(pages).map((page: NavData) => (
           <Button
+            size="large"
             key={page.title}
             href={page.route}
             onClick={onCloseNav}

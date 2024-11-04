@@ -18,6 +18,7 @@ import Register from "./routes/auth/register/register";
 import LandingPage from "./routes/landing";
 import RestaurantPage from "./routes/app/restaurant-page";
 import MakeReservation from "./routes/app/client-reservation/make-reservation";
+import MyReservations from "./routes/app/client-reservation/my-reservations";
 const theme = createTheme({
   palette: {
     primary: {
@@ -43,6 +44,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/home" element={<RestaurantList />} />
+            <Route path="/my-reservation" element={<MyReservations />} />
             <Route path="/restaurant/edit" element={<RestaurantEdit />} />
             <Route
               path="/restaurant/reservation"
