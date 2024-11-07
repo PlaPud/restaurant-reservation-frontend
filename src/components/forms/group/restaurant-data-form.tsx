@@ -22,10 +22,6 @@ const RestaurantDataForm = ({
   data = {} as RestaurantEditData,
   includePassword = true,
 }) => {
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
-
   return (
     <>
       <Box mt={1}>

@@ -53,10 +53,6 @@ const useRestaurantList = (service: IRestaurantListService) => {
     }
   }, [restaurantList]);
 
-  useEffect(() => {
-    console.log(`submitted form : ${searchFormSubmit.searchQuery}`);
-  }, [searchFormSubmit]);
-
   const handleSearch = async (
     page: number,
     searchQuery: string,

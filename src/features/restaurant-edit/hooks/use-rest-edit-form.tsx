@@ -78,7 +78,6 @@ const useRestEditForm = (
       try {
         if (!isLoading) toggleLoading();
         const data = await userService.fetchUserRestaurant();
-        console.log(data);
         setOriginalData({
           name: data.name,
           address: data.address,
@@ -102,9 +101,7 @@ const useRestEditForm = (
           paymentInfo: data.paymentInfo,
         });
         setImgPath(data.profileImgPath);
-        console.log(data);
       } catch (err) {
-        console.error(err);
         setFormData(null);
       } finally {
         toggleLoading();

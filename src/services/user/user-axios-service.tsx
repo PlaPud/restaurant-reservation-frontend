@@ -6,6 +6,7 @@ import {
 } from "../../shared/interface/user";
 import { IUserService } from "./user-service.interface";
 import { TokenRole } from "../../shared/enum/role";
+import { UserData } from "../../contexts/auth/auth-context";
 
 export class UserAxiosService implements IUserService {
   public async fetchUserCustomer(): Promise<CustomerResData> {
@@ -36,7 +37,14 @@ export class UserAxiosService implements IUserService {
     }
   }
 
-  public async fetchRole(): Promise<TokenRole> {
-    throw new Error("Method not implemented.");
+  public async fetchUserData(): Promise<UserData> {
+    try {
+      const result = await axios.get<UserData>(`${BACKEND_URL}/user/data`, {
+        withCredentials: true,
+      });
+      return result.data as UserData;
+    } catch (err) {
+      throw new Error(`Fetching user data failed. now accessing as guest.`);
+    }
   }
 }

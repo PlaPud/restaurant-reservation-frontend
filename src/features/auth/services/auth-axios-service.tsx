@@ -24,6 +24,8 @@ export class AuthAxiosService implements IAuthService {
     const res = await axios.post(`${BACKEND_URL}/restaurants`, formData);
   }
   public async logout(): Promise<void> {
-    const res = await axios.post(`${BACKEND_URL}/logout`);
+    const res = await axios.post(`${BACKEND_URL}/logout`, undefined, {
+      withCredentials: true,
+    });
   }
 }

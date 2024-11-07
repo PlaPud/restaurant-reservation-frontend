@@ -59,8 +59,6 @@ const useMyReservations = (
     if (isLoading) {
       toggleLoading();
     }
-
-    console.log(displayItems);
   }, [displayItems]);
 
   const handleFetch = async (

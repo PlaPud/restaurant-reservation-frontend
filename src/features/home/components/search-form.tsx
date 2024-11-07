@@ -16,8 +16,6 @@ const SearchForm = ({
   const service = new ThaiAddressAxiosService();
 
   const {
-    // searchForm,
-    // searchFormSubmit,
     preFetchedProvinces,
     fetchedDistricts,
     fetchedSubDists,
@@ -25,13 +23,8 @@ const SearchForm = ({
     handleChangeProvince,
     handleChangeDistrict,
     handleChangeSubDistrict,
-    // handleSubmitSearchForm,
     selectedAddress,
   } = useSearchForm(service, onQueryChange, onFilterChange);
-
-  // useEffect(() => {
-  //   console.log(`form: ${searchFormSubmit.searchQuery}`);
-  // }, [searchFormSubmit]);
 
   return (
     <Container>

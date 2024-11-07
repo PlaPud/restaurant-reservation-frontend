@@ -72,8 +72,6 @@ const useRegisForm = <T extends CustomerRegisData | RestaurantRegisData>(
 
     const { name, value } = e.target;
 
-    console.log(name, value);
-
     setFormData({
       ...formData,
       [name]: value,

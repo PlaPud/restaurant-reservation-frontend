@@ -19,6 +19,19 @@ import LandingPage from "./routes/landing";
 import RestaurantPage from "./routes/app/restaurant-page";
 import MakeReservation from "./routes/app/client-reservation/make-reservation";
 import MyReservations from "./routes/app/client-reservation/my-reservations";
+import { AuthProvider } from "../contexts/auth/auth-provider";
+import useUserService from "../hooks/services/use-user-service";
+import { IUserService } from "../services/user/user-service.interface";
+import NotFoundPage from "./routes/auth/not-found-page";
+import { TokenRole } from "../shared/enum/role";
+import {
+  CUSTOMER_ROLE_ONLY,
+  GUEST_ROLE_ONLY,
+  LOGGED_IN_ROLES,
+  MAIN_ACTOR_ROLES,
+  RESTAURANT_ROLE_ONLY,
+} from "../shared/constants";
+import ProtectedRoutes from "../features/auth/components/protected-routes";
 const theme = createTheme({
   palette: {
     primary: {
@@ -34,34 +47,58 @@ const theme = createTheme({
 });
 
 function App() {
+  const userService: IUserService = useUserService();
+
   return (
-    <ThemeProvider theme={theme}>
-      <BrowserRouter>
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <UserAppBar />
-          <Routes>
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/home" element={<RestaurantList />} />
-            <Route path="/my-reservation" element={<MyReservations />} />
-            <Route path="/restaurant/edit" element={<RestaurantEdit />} />
-            <Route
-              path="/restaurant/reservation"
-              element={<OrganizeReservation />}
-            />
-            <Route
-              path="/restaurant/:restaurantId/reserve/:reserveId"
-              element={<MakeReservation />}
-            />
-            <Route
-              path="/restaurant/:restaurantId"
-              element={<RestaurantPage />}
-            />
-          </Routes>
-        </LocalizationProvider>
-      </BrowserRouter>
-    </ThemeProvider>
+    <AuthProvider service={userService}>
+      <ThemeProvider theme={theme}>
+        <BrowserRouter>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <UserAppBar />
+            <Routes>
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/not-found" element={<NotFoundPage />} />
+
+              <Route element={<ProtectedRoutes authRoles={GUEST_ROLE_ONLY} />}>
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+              </Route>
+
+              <Route element={<ProtectedRoutes authRoles={LOGGED_IN_ROLES} />}>
+                <Route path="/home" element={<RestaurantList />} />
+              </Route>
+
+              <Route
+                element={<ProtectedRoutes authRoles={CUSTOMER_ROLE_ONLY} />}
+              >
+                <Route path="/my-reservation" element={<MyReservations />} />
+                <Route
+                  path="/restaurant/:restaurantId/reserve/:reserveId"
+                  element={<MakeReservation />}
+                />
+              </Route>
+
+              <Route
+                element={<ProtectedRoutes authRoles={RESTAURANT_ROLE_ONLY} />}
+              >
+                <Route path="/restaurant/edit" element={<RestaurantEdit />} />
+                <Route
+                  path="/restaurant/reservation"
+                  element={<OrganizeReservation />}
+                />
+              </Route>
+
+              <Route element={<ProtectedRoutes authRoles={MAIN_ACTOR_ROLES} />}>
+                <Route
+                  path="/restaurant/:restaurantId"
+                  element={<RestaurantPage />}
+                />
+              </Route>
+            </Routes>
+          </LocalizationProvider>
+        </BrowserRouter>
+      </ThemeProvider>
+    </AuthProvider>
   );
 }
 

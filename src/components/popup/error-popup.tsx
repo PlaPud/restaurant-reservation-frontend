@@ -19,7 +19,7 @@ const ErrorPopup = (props: Props) => {
 
   return (
     <>
-      <Dialog open={isOpen}>
+      <Dialog open={isOpen ?? false}>
         <DialogTitle color="error">Error {code}</DialogTitle>
         <DialogContent>
           <DialogContentText>{message}</DialogContentText>

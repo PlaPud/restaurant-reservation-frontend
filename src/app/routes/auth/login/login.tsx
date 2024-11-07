@@ -2,10 +2,12 @@ import { Box, Container, Grid2 as Grid } from "@mui/material";
 import LoginForm from "../../../../features/auth/components/login-form";
 import useAuthService from "../../../../features/auth/hooks/service/use-auth-service";
 import useLogin from "../../../../features/auth/hooks/use-login";
+import { Link } from "react-router-dom";
+import InfoPopup from "../../../../components/popup/info-popup";
 
 const Login = () => {
   const service = useAuthService();
-  const { isSubmitting, handleLoginService } = useLogin(service);
+  const hook = useLogin(service);
   return (
     <>
       <Container>
@@ -16,8 +18,8 @@ const Login = () => {
             </Box>
             <Box mt={2} className="login-form">
               <LoginForm
-                isSubmitting={isSubmitting}
-                onLogin={handleLoginService}
+                isSubmitting={hook.isSubmitting}
+                onLogin={hook.handleLoginService}
               />
             </Box>
             <Box className="register-link" display={"inline-flex"}>
@@ -26,7 +28,7 @@ const Login = () => {
               </Box>
               <Box>
                 <p>
-                  <a href="/register">ลงทะเบียนที่นี่</a>
+                  <Link to="/register">ลงทะเบียนที่นี่</Link>
                 </p>
               </Box>
             </Box>
@@ -34,6 +36,12 @@ const Login = () => {
           <Grid size={{ xs: 12, md: 6 }}></Grid>
         </Grid>
       </Container>
+      <InfoPopup
+        isOpen={hook.isFailModalOpen}
+        title={"การเข้าสู่ระบบผิดพลาด"}
+        text={`อีเมล/รหัสผ่าน ผิดพลาด\nโปรดตรวจสอบรายละเอียดให้ถูกต้อง`}
+        onClose={hook.handleFailModalClose}
+      />
     </>
   );
 };

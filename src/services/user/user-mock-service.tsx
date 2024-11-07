@@ -1,3 +1,4 @@
+import { UserData } from "../../contexts/auth/auth-context";
 import { TokenRole } from "../../shared/enum/role";
 import {
   CustomerResData,
@@ -19,7 +20,7 @@ export class UserMockService implements IUserService {
     await delay(200);
     return getMockRestaurantData();
   }
-  public async fetchRole(): Promise<TokenRole> {
+  public async fetchUserData(): Promise<UserData> {
     throw new Error("Method not implemented.");
   }
 }

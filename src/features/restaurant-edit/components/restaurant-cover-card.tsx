@@ -1,5 +1,6 @@
 import { Box, Card, CardMedia } from "@mui/material";
 import React from "react";
+import { RESTAURANT_PLACEHOLDER_IMG } from "../../../shared/constants";
 
 const RestaurantCoverCard = ({ cover, title, addressString }) => {
   return (
@@ -15,7 +16,7 @@ const RestaurantCoverCard = ({ cover, title, addressString }) => {
       <CardMedia
         component="img"
         height="400"
-        image={cover}
+        image={cover?.length > 0 ? cover : RESTAURANT_PLACEHOLDER_IMG}
         alt="restaurant-cover-image"
       />
       <Box

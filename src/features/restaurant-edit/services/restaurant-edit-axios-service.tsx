@@ -45,13 +45,11 @@ export class RestaurantEditAxiosService implements IRestaurantEditService {
             withCredentials: true,
           }
         );
-        console.log(updatedPathData.data);
       }
 
       const res = await axios.put(`${BACKEND_URL}/restaurants/me`, body, {
         withCredentials: true,
       });
-      console.log(res.data);
     } catch (err) {
       console.log(err);
     }

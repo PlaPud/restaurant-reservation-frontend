@@ -6,7 +6,6 @@ const useRoleTab = (defaultRole: Role = Role.Customer) => {
 
   const handleChangeRoleTab = (e: SyntheticEvent, value: Role) => {
     setRole(value);
-    console.log(value);
 
     e.preventDefault();
   };

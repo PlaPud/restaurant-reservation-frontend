@@ -31,8 +31,16 @@ const LoginForm = ({ isSubmitting, onLogin }) => {
             onChange={handleChangeRoleTab}
             aria-label="basic tabs example"
           >
-            <Tab label="Customer" value={Role.Customer} />
-            <Tab label="Restaurant" value={Role.Restaurant} />
+            <Tab
+              sx={{ fontSize: "1.2rem" }}
+              label="ลูกค้า"
+              value={Role.Customer}
+            />
+            <Tab
+              sx={{ fontSize: "1.2rem" }}
+              label="ร้านอาหาร"
+              value={Role.Restaurant}
+            />
           </Tabs>
         </Box>
         <Box>
@@ -60,12 +68,13 @@ const LoginForm = ({ isSubmitting, onLogin }) => {
           </Box>
           <Box mt={3}>
             <Button
+              sx={{ fontSize: "1.1rem" }}
               disabled={isSubmitting}
               type="submit"
               color="primary"
               variant="outlined"
             >
-              Login
+              เข้าสู่ระบบ
             </Button>
           </Box>
         </form>

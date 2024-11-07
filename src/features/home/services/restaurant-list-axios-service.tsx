@@ -26,12 +26,6 @@ export class RestaurantListAxiosService implements IRestaurantListService {
     searchQuery: string,
     filter: IFilterRestaurant
   ): Promise<any> {
-    console.log({
-      page,
-      searchQuery,
-      filter,
-    });
-
     const res = await axios.get(`${BACKEND_URL}/restaurants/all`, {
       withCredentials: true,
       params: {
@@ -40,8 +34,6 @@ export class RestaurantListAxiosService implements IRestaurantListService {
         filterBy: JSON.stringify(filter),
       },
     });
-
-    console.log(res.data);
 
     return res.data
       ? {

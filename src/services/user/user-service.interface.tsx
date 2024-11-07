@@ -1,3 +1,4 @@
+import { UserData } from "../../contexts/auth/auth-context";
 import { TokenRole } from "../../shared/enum/role";
 import {
   CustomerResData,
@@ -7,5 +8,5 @@ import {
 export interface IUserService {
   fetchUserCustomer(): Promise<CustomerResData>;
   fetchUserRestaurant(): Promise<RestaurantResData>;
-  fetchRole(): Promise<TokenRole>;
+  fetchUserData(): Promise<UserData>;
 }
