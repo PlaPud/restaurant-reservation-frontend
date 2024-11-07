@@ -16,7 +16,7 @@ interface Props {
 const InspectSlipPopup = ({ isOpen, imgUrl, onClose }: Props) => {
   return (
     <>
-      <Dialog open={isOpen} onClose={onClose}>
+      <Dialog open={isOpen ?? false} onClose={onClose}>
         <DialogTitle color="info">หลักฐานการโอนเงิน</DialogTitle>
         <DialogContent sx={{ maxHeight: "60vh" }}>
           {imgUrl ? (

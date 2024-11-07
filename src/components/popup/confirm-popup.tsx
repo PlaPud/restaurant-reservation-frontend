@@ -20,7 +20,7 @@ const ConfirmPopup = (props: Props) => {
 
   return (
     <>
-      <Dialog open={isOpen} onClose={onClose}>
+      <Dialog open={isOpen ?? false} onClose={onClose}>
         <DialogTitle color="success">{title}</DialogTitle>
         <DialogContent>
           <DialogContentText>{text}</DialogContentText>

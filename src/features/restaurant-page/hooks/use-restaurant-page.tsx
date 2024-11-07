@@ -3,8 +3,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import useToggle from "../../../hooks/use-toggle";
 import { RestaurantResData } from "../../../shared/interface/user";
 import { IRestaurantPageService } from "../services/restaurant-page-service.interface";
+import { IImageService } from "../../../services/img/image-service.interface";
 
-const useRestaurantPage = (service: IRestaurantPageService) => {
+const useRestaurantPage = (
+  service: IRestaurantPageService,
+  imgService: IImageService
+) => {
   const { restaurantId } = useParams();
 
   const [data, setData] = useState<RestaurantResData>(null);
@@ -35,6 +39,21 @@ const useRestaurantPage = (service: IRestaurantPageService) => {
   }, []);
 
   useEffect(() => {
+    const fetchImgUrl = async () => {
+      try {
+        const result = await imgService.fetchImageUrl(data.profileImgPath);
+        setImgUrl(result);
+      } catch (err) {
+        console.error(`Cannot Fetch Image`, err);
+        setImgUrl(null);
+      } finally {
+      }
+    };
+
+    fetchImgUrl();
+  }, [data]);
+
+  useEffect(() => {
     if (isLoading) {
       toggleLoading();
     }
@@ -49,7 +68,6 @@ const useRestaurantPage = (service: IRestaurantPageService) => {
   };
 
   const handleEachReserveBtnClick = async (id: string) => {
-    console.log(id);
     navigate(`./reserve/${id}`, { relative: "path" });
   };
 

@@ -36,8 +36,6 @@ export class MakeReservationAxiosService implements IMakeReservationService {
 
     try {
       if (paymentFile) {
-        console.log("has payment file");
-
         const imgFormData = new FormData();
 
         imgFormData.append("file", paymentFile);
@@ -48,8 +46,6 @@ export class MakeReservationAxiosService implements IMakeReservationService {
           { params: query, withCredentials: true }
         );
       }
-
-      console.log(query);
 
       const result = await axios.patch(
         `${BACKEND_URL}/reservations/make-reservation`,

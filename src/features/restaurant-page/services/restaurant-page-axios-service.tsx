@@ -15,7 +15,6 @@ export class RestaurantPageAxiosService implements IRestaurantPageService {
       }
     );
 
-    console.log(result.data);
     return result.data;
   }
 }

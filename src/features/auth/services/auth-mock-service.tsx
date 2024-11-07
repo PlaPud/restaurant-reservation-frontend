@@ -36,6 +36,7 @@ export class AuthMockService implements IAuthService {
       province: "",
       profileImgPath: "",
       description: "",
+      paymentInfo: "",
     },
   ];
 
@@ -99,6 +100,7 @@ export class AuthMockService implements IAuthService {
       reservation: [],
       profileImgPath: "",
       description: "",
+      paymentInfo: "",
     };
 
     await delay(2000);

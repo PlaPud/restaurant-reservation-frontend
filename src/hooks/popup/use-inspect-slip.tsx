@@ -21,8 +21,6 @@ const useInspectSlip = (imgService: IImageService) => {
   }, [isInspectSlip]);
 
   const handleInspectSlipClicked = async (imgPath: string) => {
-    console.log(imgPath);
-
     toggleInspectSlip();
     const url = await imgService.fetchImageUrl(imgPath);
     setImgUrl(url);

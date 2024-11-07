@@ -18,10 +18,6 @@ export const GeneralInputField = ({
     onChange(e); // Call the passed onChange function
   };
 
-  // useEffect(() => {
-  //   console.log(inputValue);
-  // }, [inputValue]);
-
   return (
     <FormControl fullWidth>
       <InputLabel

@@ -7,6 +7,8 @@ import { delay } from "../../../shared/utils/mock-utils";
 
 const useLogin = (service: IAuthService) => {
   const { toggle: isSubmitting, handleToggle: toggleSubmitting } = useToggle();
+  const { toggle: isFailModalOpen, handleToggle: toggleFailModal } =
+    useToggle();
 
   const navigate = useNavigate();
 
@@ -24,17 +26,26 @@ const useLogin = (service: IAuthService) => {
           break;
       }
 
-      navigate("/home");
+      navigate("/home", { replace: true });
+      navigate(0);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
+      toggleFailModal();
     } finally {
       toggleSubmitting();
     }
-
-    console.log(formData);
   };
 
-  return { isSubmitting, handleLoginService };
+  const handleFailModalClose = async () => {
+    toggleFailModal();
+  };
+
+  return {
+    isSubmitting,
+    isFailModalOpen,
+    handleLoginService,
+    handleFailModalClose,
+  };
 };
 
 export default useLogin;

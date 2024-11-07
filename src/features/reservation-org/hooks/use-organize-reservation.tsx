@@ -67,10 +67,6 @@ const useOrganizeReservation = (
   };
 
   useEffect(() => {
-    console.log(searchQSubmit);
-  }, [searchQSubmit]);
-
-  useEffect(() => {
     const fetchData = async () => {
       try {
         const result = await tabFetchers[tabIndex](currentPage, searchQuery);
@@ -156,7 +152,6 @@ const useOrganizeReservation = (
     setSelectedItem(null);
 
     toggleLoading();
-    console.log(result);
 
     await handleFetch(1, 1, "");
   };
@@ -169,7 +164,6 @@ const useOrganizeReservation = (
     setSelectedItem(null);
 
     toggleLoading();
-    console.log(result);
 
     await handleFetch(2, 1, "");
   };
@@ -213,7 +207,6 @@ const useOrganizeReservation = (
     toggleLoading();
     const result = await service.editReservation(selectedItem.reserveId, body);
     setFormData(DEFAULT_FORM_RESERVE);
-    console.log(result);
     setSelectedItem(null);
     toggleLoading();
     await handleFetch(tabIndex, currentPage, "");
@@ -269,7 +262,6 @@ const useOrganizeReservation = (
     toggleLoading();
     const result = await service.createReservation(body);
     setFormData(DEFAULT_FORM_RESERVE);
-    console.log(result);
     toggleLoading();
 
     await handleFetch(0, 1, "");

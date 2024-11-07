@@ -7,9 +7,11 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { RestaurantResData } from "../../../shared/interface/user";
 import { getMockRestaurantImgSrc } from "../../../shared/utils/mock-utils";
+import useImageService from "../../../hooks/services/use-image-service";
+import { RESTAURANT_PLACEHOLDER_IMG } from "../../../shared/constants";
 
 interface RestaurantCardProps {
   onCardBtnClick: (id: string) => Promise<void>;
@@ -20,13 +22,33 @@ const RestaurantCard: FC<RestaurantCardProps> = ({
   restaurant,
   onCardBtnClick,
 }) => {
+  const imgService = useImageService();
+  const [imgUrl, setImgUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchImgUrl = async () => {
+      try {
+        const result = await imgService.fetchImageUrl(
+          restaurant.profileImgPath
+        );
+        setImgUrl(result);
+      } catch (err) {
+        console.error(`Cannot Fetch Image`, err);
+        setImgUrl(null);
+      } finally {
+      }
+    };
+
+    fetchImgUrl();
+  }, [restaurant]);
+
   return (
     <Card variant="outlined" sx={{ mt: "20px", display: "flex" }}>
       <Box width={240}>
         <CardMedia
           component={"img"}
           sx={{ height: "100%", width: "100%", objectFit: "cover" }}
-          src={restaurant.profileImgPath}
+          src={imgUrl?.length > 0 ? imgUrl : RESTAURANT_PLACEHOLDER_IMG}
         />
       </Box>
       <Box>

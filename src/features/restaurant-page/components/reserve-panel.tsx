@@ -26,7 +26,7 @@ const ReservePanel = (props: Props) => {
           {available > 0 ? (
             <h3>ยังไม่ได้จองคิวร้านนี้? (เหลือ {available} คิว)</h3>
           ) : (
-            <h3 style={{ color: "darkred" }}>ร้านนี้คิวเต็มแล้ว!</h3>
+            <h3 style={{ color: "darkred" }}>ไม่มีคิวว่างสำหรับร้านนี้</h3>
           )}
         </Box>
         <Box mt={2}>

@@ -18,12 +18,18 @@ import ReservePanel from "../../../features/restaurant-page/components/reserve-p
 import useRestaurantPageService from "../../../features/restaurant-page/hooks/service/use-restaurant-page-service";
 import useRestaurantPage from "../../../features/restaurant-page/hooks/use-restaurant-page";
 import { LOREM } from "../../../shared/utils/mock-utils";
-import { MouseEvent } from "react";
+import { MouseEvent, useEffect } from "react";
 import LoadingBackdrop from "../../../components/loading/loading-backdrop";
+import { useAuth } from "../../../contexts/auth/auth-context";
+import useImageService from "../../../hooks/services/use-image-service";
+import { TokenRole } from "../../../shared/enum/role";
 
 const RestaurantPage = () => {
   const service = useRestaurantPageService();
-  const hook = useRestaurantPage(service);
+  const imgService = useImageService();
+  const hook = useRestaurantPage(service, imgService);
+
+  const authCtx = useAuth();
 
   return (
     <>
@@ -82,10 +88,12 @@ const RestaurantPage = () => {
                       </Box>
                     </Grid>
                     <Grid mt={{ xs: 2, md: 4 }} mb={6} size={{ xs: 12, md: 6 }}>
-                      <ReservePanel
-                        available={hook.data.reservation.length}
-                        onReserveBtnClicked={hook.handleOpenReserveModal}
-                      />
+                      {authCtx.user?.role !== TokenRole.Restaurant && (
+                        <ReservePanel
+                          available={hook.data.reservation.length}
+                          onReserveBtnClicked={hook.handleOpenReserveModal}
+                        />
+                      )}
                     </Grid>
                   </Grid>
                   <Divider />

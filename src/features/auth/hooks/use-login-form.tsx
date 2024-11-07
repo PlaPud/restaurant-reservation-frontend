@@ -11,7 +11,6 @@ const useLoginForm = () => {
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
     const body: UserLoginReqBody = formData;
-    console.log(body);
   };
 
   const handleInputChange = (e: ChangeEvent<HTMLTextAreaElement>) => {

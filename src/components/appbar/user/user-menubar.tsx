@@ -8,8 +8,16 @@ import {
   Typography,
 } from "@mui/material";
 import { NavData } from "../../../shared/interface/navbar";
+import { Link } from "react-router-dom";
+import { Logout } from "@mui/icons-material";
 
-const UserMenuBar = ({ settings, userMenuEl, onOpenUser, onCloseUser }) => {
+const UserMenuBar = ({
+  settings,
+  userMenuEl,
+  onOpenUser,
+  onCloseUser,
+  onLogoutClicked,
+}) => {
   return (
     <Box sx={{ flexGrow: 0 }}>
       <Tooltip title="Open settings">
@@ -35,14 +43,34 @@ const UserMenuBar = ({ settings, userMenuEl, onOpenUser, onCloseUser }) => {
         onClose={onCloseUser}
       >
         {Object.values(settings).map((setting: NavData) => (
-          <MenuItem
-            href={setting.route}
-            key={setting.title}
-            onClick={onCloseUser}
+          <MenuItem key={setting.title} onClick={onCloseUser}>
+            <Link
+              style={{ textDecoration: "none" }}
+              key={setting.title}
+              to={setting.route}
+            >
+              <Typography
+                sx={{
+                  textAlign: "center",
+                  alignItems: "center",
+                  display: "flex",
+                  textDecoration: "none",
+                  color: "black",
+                }}
+              >
+                {setting.itemIcon}
+                <Box ml={1}>{setting.title}</Box>
+              </Typography>
+            </Link>
+          </MenuItem>
+        ))}
+        <MenuItem>
+          <Link
+            style={{ textDecoration: "none" }}
+            to={"/"}
+            onClick={onLogoutClicked}
           >
             <Typography
-              component={"a"}
-              href={setting.route}
               sx={{
                 textAlign: "center",
                 alignItems: "center",
@@ -51,11 +79,11 @@ const UserMenuBar = ({ settings, userMenuEl, onOpenUser, onCloseUser }) => {
                 color: "black",
               }}
             >
-              {setting.itemIcon}
-              <Box ml={1}>{setting.title}</Box>
+              <Logout />
+              <Box ml={1}>{`ออกจากระบบ`}</Box>
             </Typography>
-          </MenuItem>
-        ))}
+          </Link>
+        </MenuItem>
       </Menu>
     </Box>
   );

@@ -80,8 +80,11 @@ const useRestaurantEdit = (
   }, [fetchedSubDists, selectedAddress.subDistrict]);
 
   useEffect(() => {
-    console.log(selectedAddress);
-  }, [selectedAddress.province]);
+    if (!formData) return;
+    setItemProvince(formData.province);
+    setItemDistrict(formData.district);
+    setItemSubDistrict(formData.subDistrict);
+  }, [formData]);
 
   const handleFileAttach = (e: BaseSyntheticEvent) => {
     const file = e.target.files[0];

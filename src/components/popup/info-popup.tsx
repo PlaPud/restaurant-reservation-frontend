@@ -19,7 +19,7 @@ const InfoPopup = (props: Props) => {
 
   return (
     <>
-      <Dialog open={isOpen}>
+      <Dialog open={isOpen ?? false} onClose={onClose}>
         <DialogTitle color="info">{title}</DialogTitle>
         <DialogContent>
           <DialogContentText>{text}</DialogContentText>

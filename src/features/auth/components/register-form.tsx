@@ -1,119 +1,105 @@
-import {
-  Box,
-  Button,
-  Container,
-  FormControl,
-  Grid2 as Grid,
-  Paper,
-  Tab,
-  Tabs,
-} from "@mui/material";
-import { GeneralInputField } from "../../../components/forms/general-form-field";
-import PasswordInputField from "../../../components/forms/password-input-field";
-import { Role } from "../../../shared/enum/role";
-import useRegisForm, { RestaurantRegisData } from "../hooks/use-regis-form";
-import useRoleTab from "../hooks/use-role-tab";
-import SelectFormField from "../../../components/forms/select-form-field";
-import useSelectAddress from "../../../hooks/use-select-address";
-import { ThaiAddressAxiosService } from "../../../services/address/thai-address-axios-service";
+import { Box, Button, Container, Paper, Tab, Tabs } from "@mui/material";
 import CustomerDataForm from "../../../components/forms/group/customer-data-form";
 import RestaurantDataForm from "../../../components/forms/group/restaurant-data-form";
+import { ThaiAddressAxiosService } from "../../../services/address/thai-address-axios-service";
+import { Role } from "../../../shared/enum/role";
+import useRegisForm from "../hooks/use-regis-form";
+import useRoleTab from "../hooks/use-role-tab";
 
 const RegisterForm = ({ isSubmitting, onRegister }) => {
   const service = new ThaiAddressAxiosService();
 
   const { role, handleChangeRoleTab } = useRoleTab();
 
-  const {
-    formData,
-    preFetchedProvinces,
-    fetchedDistricts,
-    fetchedSubDists,
-    selectedAddress,
-    handleChangeProvince,
-    handleChangeDistrict,
-    handleChangeSubDistrict,
-    handleInputChange,
-    handleSubmit,
-    clearFormFields,
-  } = useRegisForm(service);
+  const hook = useRegisForm(service);
 
   return (
-    <Paper
-      sx={{
-        backgroundColor: "whitesmoke",
-        padding: "0.25vh",
-      }}
-      elevation={3}
-    >
-      <Container
+    <>
+      <Paper
         sx={{
-          height: "100%",
-          paddingBottom: "1rem",
+          backgroundColor: "whitesmoke",
+          padding: "0.25vh",
         }}
+        elevation={3}
       >
-        <form
-          method="get"
-          action={"/"}
-          onSubmit={async (e) => {
-            e.preventDefault();
-            await onRegister(formData, role);
-          }}
-          style={{
+        <Container
+          sx={{
             height: "100%",
-            justifyContent: "space-between",
-            display: "flex",
-            flexDirection: "column",
+            paddingBottom: "1rem",
           }}
         >
-          <div className="form-fields">
-            <Box>
-              <Tabs
-                value={role}
-                onChange={(e, role: Role) => {
-                  handleChangeRoleTab(e, role);
-                  clearFormFields();
-                }}
-                aria-label="basic tabs example"
-              >
-                <Tab label="Customer" value={Role.Customer} />
-                <Tab label="Restaurant" value={Role.Restaurant} />
-              </Tabs>
-            </Box>
+          <form
+            method="get"
+            action={"/"}
+            onSubmit={async (e) => {
+              e.preventDefault();
+              await onRegister(hook.formData, role);
+            }}
+            style={{
+              height: "100%",
+              justifyContent: "space-between",
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <div className="form-fields">
+              <Box>
+                <Tabs
+                  value={role}
+                  onChange={(e, role: Role) => {
+                    handleChangeRoleTab(e, role);
+                    hook.clearFormFields();
+                  }}
+                  aria-label="basic tabs example"
+                >
+                  <Tab
+                    sx={{ fontSize: "1.2rem" }}
+                    label="ลูกค้า"
+                    value={Role.Customer}
+                  />
+                  <Tab
+                    sx={{ fontSize: "1.2rem" }}
+                    label="ร้านอาหาร"
+                    value={Role.Restaurant}
+                  />
+                </Tabs>
+              </Box>
 
-            <Box>
-              <h4>as {role}</h4>
+              <Box>
+                <h4>as {role}</h4>
+              </Box>
+              <Box>
+                {role === Role.Customer ? (
+                  <CustomerDataForm onChange={hook.handleInputChange} />
+                ) : (
+                  <RestaurantDataForm
+                    onChange={hook.handleInputChange}
+                    subDistrictItems={hook.fetchedSubDists}
+                    districtItems={hook.fetchedDistricts}
+                    provinceItems={hook.preFetchedProvinces}
+                    onChangeSubDistrict={hook.handleChangeSubDistrict}
+                    onChangeDistrict={hook.handleChangeDistrict}
+                    onChangeProvince={hook.handleChangeProvince}
+                    selectedAddressItems={hook.selectedAddress}
+                  />
+                )}
+              </Box>
+            </div>
+            <Box mt={3}>
+              <Button
+                sx={{ fontSize: "1.1rem" }}
+                disabled={isSubmitting}
+                type="submit"
+                color="secondary"
+                variant="contained"
+              >
+                สร้างบัญชีใหม่
+              </Button>
             </Box>
-            <Box>
-              {role === Role.Customer ? (
-                <CustomerDataForm onChange={handleInputChange} />
-              ) : (
-                <RestaurantDataForm
-                  onChange={handleInputChange}
-                  subDistrictItems={fetchedSubDists}
-                  districtItems={fetchedDistricts}
-                  provinceItems={preFetchedProvinces}
-                  onChangeSubDistrict={handleChangeSubDistrict}
-                  onChangeDistrict={handleChangeDistrict}
-                  onChangeProvince={handleChangeProvince}
-                  selectedAddressItems={selectedAddress}
-                />
-              )}
-            </Box>
-          </div>
-          <Box mt={3}>
-            <Button
-              disabled={isSubmitting}
-              type="submit"
-              color="secondary"
-              variant="contained"
-            >
-              Create New Account
-            </Button>
-          </Box>
-        </form>
-      </Container>
-    </Paper>
+          </form>
+        </Container>
+      </Paper>
+    </>
   );
 };
 

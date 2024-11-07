@@ -14,6 +14,7 @@ import RestaurantCard from "../../../features/home/components/restaurant-card";
 import SearchForm from "../../../features/home/components/search-form";
 import useRestaurantListService from "../../../features/home/hooks/service/use-restaurant-list-service";
 import useRestaurantList from "../../../features/home/hooks/use-restaurant-list";
+import { useAuth } from "../../../contexts/auth/auth-context";
 
 const RestaurantList = () => {
   const service = useRestaurantListService();
@@ -32,9 +33,7 @@ const RestaurantList = () => {
     handleSearch,
   } = useRestaurantList(service);
 
-  useEffect(() => {
-    console.log(`current page: ${currentPage}`);
-  }, [currentPage]);
+  const authCtx = useAuth();
 
   return (
     <>
