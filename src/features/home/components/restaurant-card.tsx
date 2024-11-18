@@ -43,7 +43,10 @@ const RestaurantCard: FC<RestaurantCardProps> = ({
   }, [restaurant]);
 
   return (
-    <Card variant="outlined" sx={{ mt: "20px", display: "flex" }}>
+    <Card
+      variant="outlined"
+      sx={{ height: "250px", mt: "20px", display: "flex" }}
+    >
       <Box width={240}>
         <CardMedia
           component={"img"}
@@ -69,14 +72,14 @@ const RestaurantCard: FC<RestaurantCardProps> = ({
           <Typography sx={{ color: "text.secondary", mb: 1.5 }}>
             {restaurant.province}
           </Typography>
-          <Typography variant="body2">
+          {/* <Typography variant="body2">
             well meaning and kindly.
             <br />
             {'"a benevolent smile"'}
             <br />
-          </Typography>
+          </Typography> */}
         </CardContent>
-        <CardActions>
+        <CardActions sx={{ marginTop: "auto" }}>
           <Button
             onClick={() => onCardBtnClick(restaurant.restaurantId)}
             variant="outlined"

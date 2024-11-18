@@ -10,6 +10,8 @@ import {
 
 const useRegister = (service: IAuthService) => {
   const { toggle: isSubmitting, handleToggle: toggleSubmitting } = useToggle();
+  const { toggle: isSuccessModalOpen, handleToggle: toggleSuccessModal } =
+    useToggle();
   const { toggle: isFailModalOpen, handleToggle: toggleFailModal } =
     useToggle();
 
@@ -21,6 +23,7 @@ const useRegister = (service: IAuthService) => {
   ) => {
     try {
       toggleSubmitting();
+
       switch (role) {
         case Role.Customer:
           await service.registerCustomer(formData as CustomerRegisData);
@@ -30,8 +33,7 @@ const useRegister = (service: IAuthService) => {
           break;
       }
 
-      navigate(0);
-      navigate("/", { replace: true });
+      toggleSuccessModal();
     } catch (error) {
       toggleFailModal();
       console.log(error);
@@ -40,14 +42,21 @@ const useRegister = (service: IAuthService) => {
     }
   };
 
+  const handleSuccessModalClose = async () => {
+    toggleSuccessModal();
+    navigate("/", { replace: true });
+  };
+
   const handleFailModalClose = async () => {
     toggleFailModal();
   };
 
   return {
     isSubmitting,
+    isSuccessModalOpen,
     isFailModalOpen,
     handleRegisterService,
+    handleSuccessModalClose,
     handleFailModalClose,
   };
 };

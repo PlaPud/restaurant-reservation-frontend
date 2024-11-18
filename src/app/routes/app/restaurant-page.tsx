@@ -82,9 +82,6 @@ const RestaurantPage = () => {
                     <Grid mb={{ md: 12, xs: 0 }} size={{ xs: 12, md: 6 }}>
                       <Box>
                         <p>{hook.data.description}</p>
-                        <p>{LOREM}</p>
-                        <p>{LOREM}</p>
-                        <p>{LOREM}</p>
                       </Box>
                     </Grid>
                     <Grid mt={{ xs: 2, md: 4 }} mb={6} size={{ xs: 12, md: 6 }}>

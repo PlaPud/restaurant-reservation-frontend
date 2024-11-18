@@ -5,6 +5,23 @@ import React, { useState } from "react";
 const UploadFileButton = ({ formRef, onChange, onRemoveFile, fileName }) => {
   return (
     <>
+      <Box
+        mt={2}
+        fontStyle="italic"
+        sx={{
+          color: "grey",
+        }}
+      >
+        *ขนาดไฟล์ไม่เกิน 1 MB
+      </Box>
+      {fileName && (
+        <span>
+          <span>{fileName}</span>
+          <IconButton onClick={onRemoveFile}>
+            <Cancel />
+          </IconButton>
+        </span>
+      )}
       <label htmlFor="upload-file-btn">
         <Button
           component="span"
@@ -26,23 +43,6 @@ const UploadFileButton = ({ formRef, onChange, onRemoveFile, fileName }) => {
         accept="image/*"
         onChange={onChange}
       />
-      {fileName && (
-        <span>
-          <span>{fileName}</span>
-          <IconButton onClick={onRemoveFile}>
-            <Cancel />
-          </IconButton>
-        </span>
-      )}
-      <Box
-        mt={2}
-        fontStyle="italic"
-        sx={{
-          color: "grey",
-        }}
-      >
-        *ขนาดไฟล์ไม่เกิน 1 MB
-      </Box>
     </>
   );
 };

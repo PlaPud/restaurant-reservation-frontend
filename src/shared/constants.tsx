@@ -2,8 +2,10 @@ import { addHours, roundToNearestHours } from "date-fns";
 import { ReservationFormData } from "../features/reservation-org/components/create-reserve-modal";
 import { TokenRole } from "./enum/role";
 import restaurant_default from "../assets/restaurant/restaurant-placeholder.png";
+import customer_default from "../assets/customer/blank-profile-picture.png";
 
 export const RESTAURANT_PLACEHOLDER_IMG = restaurant_default;
+export const CUSTOMER_PLACEHOLDER_IMG = customer_default;
 
 export const MAX_IMG_FILE_SIZE = 1 * 1024 * 1024;
 export const PAGE_SIZE = 10;

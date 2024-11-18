@@ -32,6 +32,7 @@ import {
   RESTAURANT_ROLE_ONLY,
 } from "../shared/constants";
 import ProtectedRoutes from "../features/auth/components/protected-routes";
+import MyProfile from "./routes/app/profile";
 const theme = createTheme({
   palette: {
     primary: {
@@ -71,6 +72,7 @@ function App() {
               <Route
                 element={<ProtectedRoutes authRoles={CUSTOMER_ROLE_ONLY} />}
               >
+                <Route path="/profile" element={<MyProfile />} />
                 <Route path="/my-reservation" element={<MyReservations />} />
                 <Route
                   path="/restaurant/:restaurantId/reserve/:reserveId"

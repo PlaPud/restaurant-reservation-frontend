@@ -9,7 +9,12 @@ import {
 } from "@mui/material";
 import { NavData } from "../../../shared/interface/navbar";
 import { Link } from "react-router-dom";
-import { Logout } from "@mui/icons-material";
+import {
+  AccountBox,
+  AccountCircleOutlined,
+  Logout,
+  Settings,
+} from "@mui/icons-material";
 
 const UserMenuBar = ({
   settings,
@@ -20,9 +25,9 @@ const UserMenuBar = ({
 }) => {
   return (
     <Box sx={{ flexGrow: 0 }}>
-      <Tooltip title="Open settings">
+      <Tooltip title="บัญชีของฉัน">
         <IconButton onClick={onOpenUser} sx={{ p: 0 }}>
-          <Avatar alt="User Account" src="src\assets\default-profile.jpg" />
+          <AccountCircleOutlined fontSize={"large"} sx={{ color: "white" }} />
         </IconButton>
       </Tooltip>
       <Menu

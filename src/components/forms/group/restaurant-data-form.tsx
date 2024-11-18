@@ -26,7 +26,7 @@ const RestaurantDataForm = ({
     <>
       <Box mt={1}>
         <GeneralInputField
-          value={data ? data.name : ""}
+          filledValue={data ? data.name : ""}
           required={true}
           onChange={onChange}
           type={"text"}
@@ -37,7 +37,7 @@ const RestaurantDataForm = ({
       </Box>
       <Box mt={1}>
         <GeneralInputField
-          value={data ? data.address : ""}
+          filledValue={data ? data.address : ""}
           required={true}
           type={"text"}
           onChange={onChange}
@@ -86,7 +86,7 @@ const RestaurantDataForm = ({
       </Grid>
       <Box mt={1}>
         <GeneralInputField
-          value={data ? data.email : ""}
+          filledValue={data ? data.email : ""}
           required={true}
           type={"email"}
           onChange={onChange}
@@ -102,7 +102,7 @@ const RestaurantDataForm = ({
       )}
       <Box mt={1}>
         <GeneralInputField
-          value={data ? data.phone : ""}
+          filledValue={data ? data.phone : ""}
           required={true}
           type={"text"}
           onChange={onChange}
