@@ -68,7 +68,7 @@ const MyReservations = () => {
                 <Grid size={{ xs: 12, md: 10 }}>
                   <GeneralInputField
                     type={"text"}
-                    value={hook.searchQuery}
+                    filledValue={hook.searchQuery}
                     onChange={hook.handleQueryChange}
                     id={"customer-name-search"}
                     name={"customer-name-search"}

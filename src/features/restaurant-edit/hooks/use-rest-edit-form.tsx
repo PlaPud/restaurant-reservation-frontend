@@ -116,8 +116,6 @@ const useRestEditForm = (
   };
 
   const handleTextInputChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    e.preventDefault();
-
     const { name, value } = e.target;
 
     setFormData({

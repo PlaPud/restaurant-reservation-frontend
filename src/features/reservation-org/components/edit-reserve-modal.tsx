@@ -50,7 +50,7 @@ const EditReserveModal = (props: Props) => {
                 id={"seat-field"}
                 name={"seats"}
                 label={"จำนวนที่นั่ง"}
-                value={String(formData.seats)}
+                filledValue={String(formData.seats)}
               />
             </Grid>
             <Grid mt={1} size={{ xs: 6, md: 4 }}>
@@ -60,7 +60,7 @@ const EditReserveModal = (props: Props) => {
                 id={"price-field"}
                 name={"reservePrice"}
                 label={"ราคา/ค่ามัดจำ (บาท)"}
-                value={String(formData.reservePrice)}
+                filledValue={String(formData.reservePrice)}
               />
             </Grid>
             <Grid mt={1} size={{ xs: 6, md: 5 }}>

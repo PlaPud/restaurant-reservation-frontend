@@ -109,7 +109,7 @@ const buildSettingBar = (
     customer: {
       myAccount: {
         title: "บัญชีของฉัน",
-        route: "/account",
+        route: "/profile",
         itemIcon: <Person />,
       },
     },

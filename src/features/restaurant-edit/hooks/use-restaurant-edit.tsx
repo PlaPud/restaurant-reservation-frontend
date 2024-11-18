@@ -50,6 +50,10 @@ const useRestaurantEdit = (
 
   const imgFileRef = useRef<HTMLInputElement | null>(null);
 
+  // useEffect(() => {
+  //   console.log("formData");
+  // }, [formData]);
+
   useEffect(() => {
     if (imgPath === "") return;
     const fetchUrl = async () => {
@@ -84,7 +88,7 @@ const useRestaurantEdit = (
     setItemProvince(formData.province);
     setItemDistrict(formData.district);
     setItemSubDistrict(formData.subDistrict);
-  }, [formData]);
+  }, [formData?.province, formData?.district, formData?.subDistrict]);
 
   const handleFileAttach = (e: BaseSyntheticEvent) => {
     const file = e.target.files[0];

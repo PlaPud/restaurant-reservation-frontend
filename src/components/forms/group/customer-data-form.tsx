@@ -1,14 +1,20 @@
 import { Box, Grid2 as Grid } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { GeneralInputField } from "../general-form-field";
 import PasswordInputField from "../password-input-field";
+import { CustomerEditData } from "../../../features/profile/hooks/use-my-profile";
 
-const CustomerDataForm = ({ onChange }) => {
+const CustomerDataForm = ({
+  onChange,
+  data = {} as CustomerEditData,
+  includePassword = true,
+}) => {
   return (
     <>
       <Grid container mt={1} spacing={2}>
         <Grid size={6}>
           <GeneralInputField
+            filledValue={data ? data.fName : ""}
             required={true}
             onChange={onChange}
             type={"text"}
@@ -19,6 +25,7 @@ const CustomerDataForm = ({ onChange }) => {
         </Grid>
         <Grid size={6}>
           <GeneralInputField
+            filledValue={data ? data.lName : ""}
             required={true}
             onChange={onChange}
             type={"text"}
@@ -30,6 +37,7 @@ const CustomerDataForm = ({ onChange }) => {
       </Grid>
       <Box mt={1}>
         <GeneralInputField
+          filledValue={data ? data.email : ""}
           required={true}
           type={"email"}
           onChange={onChange}
@@ -38,11 +46,14 @@ const CustomerDataForm = ({ onChange }) => {
           label={"Email"}
         />
       </Box>
-      <Box mt={1}>
-        <PasswordInputField onChange={onChange} />
-      </Box>
+      {includePassword && (
+        <Box mt={1}>
+          <PasswordInputField onChange={onChange} />
+        </Box>
+      )}
       <Box mt={1}>
         <GeneralInputField
+          filledValue={data ? data.phone : ""}
           required={true}
           type={"text"}
           onChange={onChange}

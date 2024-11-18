@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 export const GeneralInputField = ({
   required = false,
-  value = undefined,
+  filledValue = undefined,
   type,
   onChange,
   id,
@@ -11,7 +11,7 @@ export const GeneralInputField = ({
   label,
 }) => {
   const [isFocused, setIsFocused] = useState(false);
-  const [inputValue, setInputValue] = useState(value);
+  const [inputValue, setInputValue] = useState(filledValue);
 
   const handleChange = (e) => {
     setInputValue(e.target.value);
@@ -22,13 +22,12 @@ export const GeneralInputField = ({
     <FormControl fullWidth>
       <InputLabel
         htmlFor={id}
-        shrink={Boolean(inputValue ?? value) || isFocused}
+        shrink={Boolean(inputValue ?? filledValue) || isFocused}
       >
         {label}
       </InputLabel>
       <OutlinedInput
-        defaultValue={inputValue ?? value}
-        value={inputValue ?? value}
+        value={inputValue ?? filledValue ?? ""}
         required={required}
         name={name}
         id={id}

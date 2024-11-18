@@ -39,6 +39,12 @@ const Register = () => {
         </Grid>
       </Container>
       <InfoPopup
+        isOpen={hook.isSuccessModalOpen}
+        title={"สำเร็จ"}
+        text={"ลงทะเบียนสำเร็จ กรุณาเข้าสู่ระบบเพื่อใช้งาน"}
+        onClose={hook.handleSuccessModalClose}
+      />
+      <InfoPopup
         isOpen={hook.isFailModalOpen}
         title={"การลงทะเบียนผิดพลาด"}
         text={"กรุณาตรวจสอบข้อมูลให้ถูกต้อง"}

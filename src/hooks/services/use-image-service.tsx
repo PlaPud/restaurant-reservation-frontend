@@ -4,7 +4,9 @@ import { ImageFireBaseService } from "../../services/img/firebase/image-firebase
 import { ImageMockService } from "../../services/img/image-mock-service";
 
 const useImageService = () => {
-  const [service, setService] = useState<IImageService>(new ImageMockService());
+  const [service, setService] = useState<IImageService>(
+    new ImageFireBaseService()
+  );
   return service;
 };
 
