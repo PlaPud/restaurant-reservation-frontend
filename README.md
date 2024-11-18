@@ -1,5 +1,11 @@
 # Frontend of Restaurant Reservation App
 - Basics features for making reservations (CRUDs)
-- Customer, Restaurant User Auth.
+  - Authentications
+  - Search Restaurants with some filters and searchbar (Customer, Restaurant)
+  - Create Reservation (Restaurant)
+  - View Reservation Data (includes viewing payment image) with some filters and searchbar (Restaurant)
+  - Update Approve Delete Reservations (Restaurant)
+  - Make Reservation and Attach Payment Image (Customer)
+  - Edit Profiles (Restaurant, Customer)
 - integrated with Backend / Firebase Image Storage
 - using Typescript + React and Axios 
