@@ -14,6 +14,7 @@ import {
 } from "@mui/x-date-pickers";
 import { ChangeEvent } from "react";
 import { GeneralInputField } from "../../../components/forms/general-form-field";
+import { startOfDay } from "date-fns";
 
 export interface ReservationFormData {
   seats: number;
@@ -66,7 +67,7 @@ const CreateReserveModal = (props: Props) => {
             <Grid mt={1} size={{ xs: 6, md: 5 }}>
               <DateTimePicker
                 defaultValue={new Date(formData.reserveDate)}
-                disablePast
+                minDateTime={startOfDay(new Date())}
                 label={"เวลาจอง"}
                 value={
                   formData.reserveDate ? new Date(formData.reserveDate) : null
