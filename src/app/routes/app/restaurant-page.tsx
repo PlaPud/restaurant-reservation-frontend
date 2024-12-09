@@ -73,7 +73,9 @@ const RestaurantPage = () => {
                       <h3>ช่องทางการชำระเงิน</h3>
                       <Box mt={2} display={"flex"} alignContent={"center"}>
                         <PaymentsTwoTone />
-                        <Box ml={2}>{hook.data.paymentInfo}</Box>
+                        <Box ml={2} sx={{ whiteSpace: "pre-line" }}>
+                          {hook.data.paymentInfo}
+                        </Box>
                       </Box>
                     </Grid>
                   </Grid>
@@ -81,7 +83,9 @@ const RestaurantPage = () => {
                   <Grid container spacing={2}>
                     <Grid mb={{ md: 12, xs: 0 }} size={{ xs: 12, md: 6 }}>
                       <Box>
-                        <p>{hook.data.description}</p>
+                        <p style={{ whiteSpace: "pre-line" }}>
+                          {hook.data.description}
+                        </p>
                       </Box>
                     </Grid>
                     <Grid mt={{ xs: 2, md: 4 }} mb={6} size={{ xs: 12, md: 6 }}>

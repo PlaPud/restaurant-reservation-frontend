@@ -249,6 +249,7 @@ export class OrganizeReservationAxiosService
 
       const result = await axios.patch<ReservationResData>(
         `${BACKEND_URL}/reservations/cancel`,
+        {},
         {
           withCredentials: true,
           params: query,
