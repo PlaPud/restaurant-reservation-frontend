@@ -37,6 +37,7 @@ export const GeneralInputField = ({
         label={label}
         type={type}
         fullWidth
+        inputProps={type === "number" && { min: 0 }}
       />
     </FormControl>
   );

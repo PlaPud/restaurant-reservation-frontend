@@ -215,7 +215,8 @@ const buildCustomizeButton = (
   onDeleteBtnClicked?: (value?: any) => any
 ) => {
   return (
-    !isCustomerView && (
+    !isCustomerView &&
+    !isReserveCutOff(reservation.reserveDate) && (
       <>
         <Button variant="outlined" color="primary" onClick={onEditBtnClicked}>
           <Edit />

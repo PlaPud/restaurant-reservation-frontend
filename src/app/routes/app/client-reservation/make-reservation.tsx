@@ -194,7 +194,7 @@ const MakeReservation = () => {
                   <h2>แนบหลักฐานการโอนเงิน</h2>
                 </Box>
                 <Box my={3}>
-                  <Box>
+                  <Box mb={1}>
                     <UploadFileButton
                       formRef={hook.imgInputRef}
                       onChange={hook.handleFileAttach}
