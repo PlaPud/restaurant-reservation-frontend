@@ -35,12 +35,28 @@ const MakeReservation = () => {
             size="large"
             color="info"
             onClick={hook.handleReturnClicked}
+            sx={{
+              fontSize: "1.2rem",
+            }}
           >
             ย้อนกลับ
           </Button>
         </Box>
+
         <Grid container spacing={3}>
           <Grid mt={1} size={{ xs: 12, md: 6 }}>
+            <Box my={3}>
+              <h2>ช่องทางการโอนเงิน</h2>
+            </Box>
+            <Paper variant="outlined">
+              {hook.data ? (
+                <Box mx={2} my={3}>
+                  <Typography whiteSpace={"pre-line"}>
+                    {hook.data.restaurant.paymentInfo}
+                  </Typography>
+                </Box>
+              ) : null}
+            </Paper>
             <Box my={3}>
               <h2>รายละเอียดการจอง</h2>
             </Box>
@@ -187,7 +203,7 @@ const MakeReservation = () => {
               </Box>
             )}
           </Grid>
-          <Grid mt={3} mb={{ xs: 6, md: 0 }} size={{ xs: 12, md: 6 }}>
+          <Grid mt={1} mb={{ xs: 6, md: 0 }} size={{ xs: 12, md: 6 }}>
             {hook.data && hook.data.reservePrice > 0 && (
               <>
                 <Box my={{ xs: 0, md: 3 }}>

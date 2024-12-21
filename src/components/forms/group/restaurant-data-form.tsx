@@ -62,7 +62,7 @@ const RestaurantDataForm = ({
         <Grid size={{ xs: 12, md: 4 }}>
           <SelectFormField
             id="district-field"
-            label="อำเภอ/แขวง"
+            label="อำเภอ/เขต"
             name="district"
             selectedValue={selectedAddressItems.district ?? ""}
             items={districtItems}
@@ -74,7 +74,7 @@ const RestaurantDataForm = ({
         <Grid size={{ xs: 12, md: 4 }}>
           <SelectFormField
             id="sub-district-field"
-            label="ตำบล/เขต"
+            label="ตำบล/แขวง"
             name="subDistrict"
             selectedValue={selectedAddressItems.subDistrict ?? ""}
             items={subDistrictItems}

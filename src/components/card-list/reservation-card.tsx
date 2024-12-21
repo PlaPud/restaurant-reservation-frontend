@@ -5,8 +5,6 @@ import {
   Delete,
   Edit,
   HourglassBottom,
-  LockClock,
-  Timer,
 } from "@mui/icons-material";
 import {
   Box,
@@ -241,9 +239,14 @@ const buildNameText = (
         ชื่อร้าน: {reservation.restaurant.name}
       </Typography>
     ) : (
-      <Typography noWrap textOverflow={"ellipsis"}>
-        ชื่อผู้จอง: {reservation.customer.fName} {reservation.customer.lName}
-      </Typography>
+      <>
+        <Typography noWrap textOverflow={"ellipsis"}>
+          ชื่อผู้จอง: {reservation.customer.fName} {reservation.customer.lName}
+        </Typography>
+        <Typography noWrap textOverflow={"ellipsis"}>
+          เบอร์ติดต่อ: {reservation.customer.phone}
+        </Typography>
+      </>
     )
   ) : (
     <Typography

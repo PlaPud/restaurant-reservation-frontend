@@ -93,9 +93,17 @@ export const getMockReservationData = (isCustomerActed: boolean = false) => {
 };
 
 export const getFormatDateTime = (seconds: number) => {
-  const localeString = new Date(seconds * 1000).toLocaleString("en-TH");
-  const formatted = localeString.split(",").join("");
-  return formatted;
+  const localeString = new Date(seconds * 1000).toLocaleString("en-TH", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
+  const splitted = localeString.replace(",", "");
+
+  return splitted;
 };
 
 export const isFullNameMatched = (
