@@ -62,7 +62,7 @@ const ReservationCard = (props: Props) => {
         <Typography noWrap textOverflow={"ellipsis"}>
           จำนวน: {reservation.seats.toLocaleString()} ที่นั่ง
         </Typography>
-        <Typography noWrap textOverflow={"ellipsis"}>
+        <Typography>
           เวลา: {getFormatDateTime(reservation.reserveDate)}
         </Typography>
         <Divider />
@@ -171,8 +171,7 @@ const buildSlipTimeStamp = (reservation: ReservationResData) => {
     reservation.customer && (
       <Typography
         sx={{ color: "grey", fontSize: "0.85rem" }}
-        noWrap
-        textOverflow={"ellipsis"}
+        textOverflow={"initial"}
       >
         เวลาแนบหลักฐานการจอง: {getFormatDateTime(reservation.lastModified)}
       </Typography>

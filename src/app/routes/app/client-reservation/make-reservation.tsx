@@ -51,7 +51,7 @@ const MakeReservation = () => {
             <Paper variant="outlined">
               {hook.data ? (
                 <Box mx={2} my={3}>
-                  <Typography whiteSpace={"pre-line"}>
+                  <Typography fontSize={"1.2rem"} whiteSpace={"pre-line"}>
                     {hook.data.restaurant.paymentInfo}
                   </Typography>
                 </Box>
@@ -119,24 +119,8 @@ const MakeReservation = () => {
                               fontSize: "1.25rem",
                             }}
                           >
-                            วันที่:{" "}
-                            {
-                              getFormatDateTime(hook.data.reserveDate).split(
-                                " "
-                              )[0]
-                            }{" "}
-                          </Typography>
-                          <Typography
-                            sx={{
-                              fontSize: "1.25rem",
-                            }}
-                          >
-                            เวลา:{" "}
-                            {
-                              getFormatDateTime(hook.data.reserveDate).split(
-                                " "
-                              )[1]
-                            }
+                            วันและเวลาจอง:{" "}
+                            {getFormatDateTime(hook.data.reserveDate)}
                           </Typography>
                         </Box>
                       )}
