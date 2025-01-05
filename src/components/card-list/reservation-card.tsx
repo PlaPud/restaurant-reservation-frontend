@@ -213,6 +213,8 @@ const buildCustomizeButton = (
 ) => {
   return (
     !isCustomerView &&
+    !reservation.isPayed &&
+    !reservation.isAttended &&
     !isReserveCutOff(reservation.reserveDate) && (
       <>
         <Button variant="outlined" color="primary" onClick={onEditBtnClicked}>

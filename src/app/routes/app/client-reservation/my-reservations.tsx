@@ -70,9 +70,9 @@ const MyReservations = () => {
                     type={"text"}
                     filledValue={hook.searchQuery}
                     onChange={hook.handleQueryChange}
-                    id={"customer-name-search"}
-                    name={"customer-name-search"}
-                    label={"ค้นหาชื่อลูกค้า"}
+                    id={"restaurant-name-search"}
+                    name={"restaurant-name-search"}
+                    label={"ค้นหาชื่อร้าน"}
                   />
                 </Grid>
                 <Grid size={{ xs: 12, md: 2 }}>
